@@ -1,0 +1,72 @@
+.section-2{
+    height: 100%;
+    width: 100%;
+    padding-top: 8.8rem;
+    text-align: center;
+    gap: 20px;
+    display: flex;
+    flex-direction: column;
+    color: var(--color-green);
+    align-items: center ;
+    background-image: linear-gradient(to bottom, transparent 70%, var(--color-green-alpha-50));
+
+    :global(.title){
+        width: 80%;
+
+        h1{
+            font-weight: 100;
+            font-size: 3em;
+        }
+    }
+
+    :global(.description){
+        width: 70%;
+        
+        p{
+            font-weight: 100;
+            color: var(--color-green-alpha-50);
+        }
+    }
+
+    :global(.feature-wrapper){
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 14px;
+
+        span{
+            color: var(--color-black);
+        }
+    }
+
+    :global(.feature-item){
+        border-radius: 50%;
+        font-size: .7em;
+        height: 60px;
+        width: 60px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        aspect-ratio: 1;
+        border: solid 1px var(--color-green-alpha-50);
+
+        :global(.icon-planet-nature){
+            font-size: 1.4em;
+        }
+        
+    }
+
+    :global(.animated-container):has(:global(.spacer)){
+        display: flex;
+        flex-direction: column;
+        :global(.spacer){
+            flex: 1 0 1px;
+            background-color: var(--color-green);
+            width: 128px;
+            
+            margin: 4px 0;
+        }
+    }
+
+
+}

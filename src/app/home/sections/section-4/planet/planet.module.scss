@@ -1,0 +1,93 @@
+
+
+.planet-component{
+
+    display: flex;
+    flex-direction: column;
+    overflow: visible;
+    margin-top: 70px;
+    font-size: .85rem;
+    position: relative;
+
+    &::after{
+        content: '';
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        width: 125%;
+        position: absolute;
+        height: 125%;
+        border: solid 1px var(--color-black-alpha-15);
+        border-radius: 50%;
+    }
+
+    :global(.planetWrapper){
+        position: relative;
+        overflow: visible;
+    }
+    
+    :global(.indicatorsWrapper){
+        width: 100%;
+        overflow:  visible;
+        height: 100%;
+        position: absolute;
+
+        :global(.indicator-item){
+            --position-x: 0;
+            --position-y: 0;
+            --size: 50px;
+            position: absolute;
+            z-index: 1;
+            overflow: visible;
+            left: var(--position-x);
+            top: var(--position-y);
+
+            :global(.point){
+                position: absolute;
+                aspect-ratio: 1;
+                border-radius: 50%;
+                background: var(--color-green-2);
+                width: var(--size);
+                left: 50%;
+                top: 50%;
+                translate: -50% -50%;
+            }
+            :global(.label){
+                --padding: 0em;
+                position: absolute;
+                white-space: nowrap;                
+                background-color: white;
+                border-radius: 10em;
+                text-transform: uppercase;
+                padding: .6em var(--padding);
+                width: max-content;
+                font-size: 1.3em;
+                max-width: 50dvw;
+                text-wrap: wrap ;
+                font-weight: 600;
+
+                &:global(.position-bottom){                    
+                    top: calc(1.4rem + 100%);
+                }
+                
+                &:global(.position-top){
+                    bottom: calc(1.4em + 100%);
+                }
+
+                &:global(.align-end){
+                    right: -3rem;
+                }
+
+                &:global(.align-center){
+                    left: 50%;
+                    transform: translateX(-50%);
+                }
+
+                &:global(.align-start){
+                    left: -3rem;
+                }
+            }
+        }
+    }
+
+}

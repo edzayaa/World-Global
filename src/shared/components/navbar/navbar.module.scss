@@ -1,0 +1,98 @@
+
+
+.navbar{
+    --vertical-dist: 13px;
+    --lateral-dist: 15px;
+
+    --padding-vertical: 10px;
+    --height: 0px;
+    --height-top: 6.1rem;
+    
+    position: fixed;
+    top: var(--vertical-dist);
+    left: var(--lateral-dist);
+    z-index: var(--layer-layout);
+    background-color: var(--color-black-alpha-60);
+    width: calc(100% - (var(--lateral-dist) * 2));
+    border-radius: var(--border-radius-frame);
+
+    display: grid;
+    grid-template-rows: calc(var(--height-top) - calc(var(--padding-vertical) * 2)) var(--height);
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+
+    overflow: hidden;
+    padding: var(--padding-vertical);
+    padding-left: 18px;
+    max-height: calc(100dvh - (var(--padding-vertical) * 1.5) - (var(--vertical-dist)));
+
+    backdrop-filter: blur(var(--blur-md));
+
+    transition: grid-template-rows ease-in-out var(--animation-speed-fast) calc(var(--animation-speed-fast) / 2);
+
+    overflow: visible;
+    
+    &:has(:global(.nav-section.open)){
+        --height: 100dvh;        
+        transition: grid-template-rows ease-in-out var(--animation-speed-fast) ;
+
+        :global(.button-menu){
+            opacity: 0;
+            scale: 0;
+        }
+
+        :global(.button-menu-close){
+            opacity: 1;
+            scale: 1;
+        }
+    }
+
+
+    i:global(.icon-logo-after){
+        grid-row: 1;
+        width: 5.7rem;
+        
+        &::after{
+            scale: 1.73;
+            translate: -50% -50%;
+        }
+    }
+
+    :global(.button-menu){
+        grid-column: 3;
+        --border-radius: var(--border-radius-xs) !important;
+        transition: opacity ease-in-out var(--animation-speed-fast) calc(var(--animation-speed-fast) / 2), scale ease-in-out var(--animation-speed-fast) calc(var(--animation-speed-fast) / 2);
+    }
+
+    :global(.button-menu-close){
+        grid-column: 3;
+        opacity: 0;
+        scale: 0;
+        position: absolute;
+        top: calc(var(--padding-vertical) * 0.5);
+        background-color: transparent;        
+        transition: opacity ease-in-out var(--animation-speed-fast) calc(var(--animation-speed-fast) / 2), scale ease-in-out var(--animation-speed-fast) calc(var(--animation-speed-fast) / 2);
+        --padding-vertical: 12px !important;
+        
+    }
+
+    
+
+}
+
+.backdrop{
+    width: 100dvw;
+    height: 100dvh;
+    position: fixed;
+    background-color: rgba(255, 255, 255, 0.027);
+    inset: 0;
+    z-index: var(--layer-layout);
+    backdrop-filter: blur(12px);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity var(--animation-speed-fast) ease-in-out;
+}
+
+body:has(:global(.nav-section.open)) .backdrop{
+    opacity: 1;
+}

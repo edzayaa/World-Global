@@ -1,0 +1,39 @@
+
+.section-5{
+    height: 100%;
+    width: 100%;
+    padding: 88px 22px 37px;
+    color: var(--color-white);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+    align-items: center;
+    overflow: hidden;
+
+    :global(.title){
+        font-weight: 100;
+        font-family: var(--font-light);
+        padding: 0 7px;
+        width: 100%;
+        font-size: 2.6rem;
+    }
+
+    :global(.description){
+        font-weight: 100;
+        font-family: var(--font-light);
+        color: var(--color-white-alpha-60);
+        padding: 0 7px;
+        width: 100%;
+        font-size: 1.4rem;
+        max-width: 80%;
+        
+    }
+
+    :global(.reviews-container){
+        width: 100%;
+        height: 100%;
+        flex: 1;
+        overflow: hidden;
+    }
+}

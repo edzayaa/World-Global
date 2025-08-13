@@ -1,0 +1,64 @@
+
+@use '../../styles/breakpoints' as *;
+
+.button{
+    --padding-right: 9px;
+    --padding-left: 15px;
+    --padding-vertical: 8px;
+    --border-radius: var(--border-radius-sm);
+    --height: 4.1rem;
+
+    --border-color: var(--color-white-alpha-40);
+    --background-color: unset;
+
+    padding: var(--padding-vertical) var(--padding-right) var(--padding-vertical) var(--padding-left);
+    border-radius: var(--border-radius);
+
+    height: var(--height);
+    background-color: var(--background-color);
+    border-color: var(--border-color);
+    border-width: 1px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: max-content;
+    max-height: 100%;
+    cursor: pointer;
+
+    &:global(.button-border) {
+        border-style: solid;
+    }
+
+    &:global(.button-mono-child) {
+        --padding-right: 8px;
+        --padding-left: 8px;
+        --padding-vertical: 8px;
+        --border-radius: var(--border-radius-sm);
+        aspect-ratio: 1;
+        overflow: hidden;
+
+        i{
+            height: 100%;
+            width: 100%;
+        }
+    }
+
+    &:global(.button-circle){
+        --padding-vertical: 7px;
+        --padding-right: var(--padding-vertical);
+        --padding-left: var(--padding-vertical);
+        border-radius: 50%;
+
+        @media screen and (width > $md) {
+            --padding-vertical: 10px;
+            
+        }
+        
+    }
+
+
+    @media screen and (width > $md) {
+        --height: 6.1rem;
+        --border-radius: var(--border-radius-sm)
+    }
+}

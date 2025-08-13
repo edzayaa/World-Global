@@ -1,0 +1,56 @@
+
+
+.reviews-view{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    overflow-x: auto;
+    padding-bottom: 25px;
+    display: flex;
+    gap: 12px;
+    position: relative;
+    scroll-snap-type: x mandatory;
+
+        &::-webkit-scrollbar{
+            display: auto;
+            height: 1px;
+            background-color: var(--color-white-alpha-25) !important;
+        }
+
+        &::-webkit-scrollbar-thumb{
+            background-color: var(--color-yellow-2) !important;
+        }
+    
+    
+    :global(.review-item){
+        scroll-snap-align: start;
+        border-radius: var(--border-radius-md);
+        width: 100%;
+        flex: 1 0 100%;
+        height: 100%;
+        position: relative;
+        overflow: hidden;
+        
+    }
+
+    :global(.card){
+        position: absolute;
+        left: 15px;
+        bottom: 15px;
+        height: min(15.5rem, 30%);
+        backdrop-filter: blur(var(--blur-md));
+        padding: 31px 28px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        h3{
+            text-align: start;
+            font-size: 1.8rem;
+        }
+
+        p{
+            font-size: 1.45rem;
+            text-align: start;
+        }
+    }
+}

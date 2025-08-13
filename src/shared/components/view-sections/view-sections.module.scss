@@ -1,0 +1,22 @@
+@use '../../styles/breakpoints' as *;
+
+.view-section{
+    --padding: 6px;
+
+    height: 100dvh;
+    width: 100dvw;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    overflow: hidden;
+    min-height: 100dvh;
+    min-width: 100dvw;
+
+    &:global(.padding){
+        padding: var(--padding);
+    }
+
+    @media screen and (width > $md) {
+        --padding: 16px;
+        
+    }
+}
