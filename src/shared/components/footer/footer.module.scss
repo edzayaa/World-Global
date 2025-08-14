@@ -1,0 +1,185 @@
+
+
+.form-pre-footer{
+    display: flex;
+    flex-direction: column;
+    padding-top: 10rem;
+    text-align: center;
+    align-items: center;
+    gap: 55px;
+    padding-bottom: 5rem;
+
+    :global(.title){
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        gap: 22px;
+        align-items: center;
+
+        h1{
+            font-size: 5.2rem;
+            font-weight: 100;
+            font-family: var(--font-light);
+        }
+
+        p{
+            font-size: 1.4rem;
+            color: var(--color-black-alpha-70);
+            width: 80%;
+            
+        }
+
+    }
+
+    :global(.form-wrapper){
+        width: 100%;
+        padding: 0 32px;
+        display: flex;
+        flex-direction: column;
+        flex: 1 ;
+        justify-content: space-between;
+        align-items: flex-end;
+
+        input, select, textarea{
+            width: 100%;
+            font-size: 1.45rem;
+            height: 4rem;
+            background-color: transparent;
+            font-weight: 600;
+           
+            border-bottom: var(--color-black-alpha-70) solid 1px;
+        }
+
+        input::placeholder, textarea::placeholder{
+            color: var(--color-black-alpha-15);
+        }
+
+        select{            
+            padding-left: 0px;
+        }
+
+        :global(.select-wrapper){
+            width: 100%;
+            position: relative;
+            
+            :global(.placeholder){
+                position: absolute;
+                top: 50%;
+                left: 0px;
+                transform: translateY(-50%);
+                color: var(--color-black-alpha-15);
+                font-weight: 600;
+                font-family: var(--font-regular);
+            }
+
+            select{
+                color: var(--color-black);
+
+                option{
+                    background-color: var(--color-white);
+
+                }
+
+            }
+        }
+
+        textarea{
+            &::placeholder{
+                color: var(--color-black-alpha-15);
+                font-weight: 600;
+                font-family: var(--font-regular);
+            }
+            font-weight: 600;
+            font-family: var(--font-regular);
+            height: 80px;
+            font-size: 1.45rem;
+        }
+
+        :global(.button):not(:global(.button-circle)){
+            color: var(--color-white);
+            font-size: 1.3rem;
+            padding-left: 52px;
+            gap: 32px;
+        }
+    }
+}
+
+
+.footer{
+    background-color: var(--color-black);
+    border-radius: var(--border-radius-md);
+    border-bottom-left-radius: unset;
+    border-bottom-right-radius: unset;
+    padding-top: 8.6rem;
+    display: flex;
+    flex-direction: column;
+    gap: 78px;
+    align-items: center;
+
+    :global(.links-wrapper){
+        display: flex;
+        flex-direction: column;
+        gap: 32px;
+        text-align: center;
+
+        a{
+            color: var(--color-white-alpha-50);
+
+            &:global(.active){
+                color: var(--color-white);
+            }
+        }
+    }
+
+    :global(.contact-info){
+        color: var(--color-white-alpha-100);
+        width: 60%;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+        text-align: center;
+        font-size: 1.7rem;
+
+        span{
+            display: block;
+        }
+    }
+
+    :global(.end-wrapper){
+        flex: 1;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        padding-bottom: 34px;
+
+        :global(.extras-sites){
+            display: flex;
+            justify-content: space-between;
+            padding: 0 18px 16px 15px;
+
+            a{
+                color: var(--color-white-alpha-50)
+            }
+        }
+
+        :global(.world-name){
+
+            display: flex;
+            padding: 0 42px;
+
+            img{
+                width: 100%;
+                overflow: hidden;
+                object-fit: contain;
+            }
+        }
+
+        >span{
+            color: var(--color-white);
+            text-align: center;
+            font-size: 1.8rem;
+        }
+
+    }
+}

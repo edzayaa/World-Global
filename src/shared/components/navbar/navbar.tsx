@@ -23,11 +23,17 @@ export const Navbar = () => {
             <AnimatedContainer inSignal={inSignal} animationIn={InFromTop} className={clsx(style.navbar)}>
                 <Icon icon={'logo-after'}></Icon>
                 <NavSection openState={openPanel} />
-                <Button border className='button-menu' onClick={() => setOpenPanel(!openPanel)}>
+                <Button border className='button-menu hide-min-md' onClick={() => setOpenPanel(!openPanel)}>
                     <Icon icon={'menu'} />
                 </Button>
-                <Button className='button-menu-close' onClick={() => setOpenPanel(!openPanel)} >
+                <Button className='button-menu-close hide-min-md' onClick={() => setOpenPanel(!openPanel)} >
                     <Icon icon={'close'} />
+                </Button>
+                <Button border className='quote-button'>
+                    <span>Quote now</span>
+                    <Button circle color={{color: 'orange', alpha: '100'}}>
+                        <Icon color={{color: 'white', alpha: '100'}} icon='arrow-right-with-tail' />
+                    </Button>
                 </Button>
             </AnimatedContainer>
         </>

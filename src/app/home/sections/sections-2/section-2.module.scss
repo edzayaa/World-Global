@@ -1,3 +1,5 @@
+@use '../../../../shared/styles/breakpoints' as *;
+
 .section-2{
     height: 100%;
     width: 100%;
@@ -68,5 +70,53 @@
         }
     }
 
+    @media screen and (width > $md) {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        align-content: center;
+        flex-wrap: wrap;
+
+        :global(.title){
+            flex: 1 0 100%;
+            font-size: 2.5rem;
+        }
+
+        :global(.description){
+            flex: 1 0 100%;
+            justify-content: center;
+            display: flex;
+            margin-bottom: 4px;
+            p{
+                max-width: 15%;
+                color: var(--color-black-alpha-70);
+            }
+        }
+
+        :global(.spacer){            
+            flex: 1 0 1px !important;
+            min-height: 32px;
+            width: 1px !important;
+            
+        }
+
+
+        :global(.feature-wrapper){
+            gap: 32px;
+            flex-direction: row;                  
+            
+            :global(.feature-item){
+                width: 80px;
+                height: 80px;
+                font-size: 1.5rem;
+            }
+        }
+        :has(:global(.spacer)){
+            margin: 0 32px;
+
+        }
+        
+    }
 
 }

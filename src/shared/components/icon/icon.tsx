@@ -6,7 +6,7 @@ import clsx from 'clsx';
 import { Color } from '@/shared/types/colors';
 
 export interface IconProps{
-    icon: 'close' | 'logo' | 'logo-after' | 'menu' | 'arrow-right-with-tail' | 'bamboo' | 'shield' | 'planet-nature' | 'leaf' | 'waves' | 'fire' | 'arrow-down',
+    icon: 'close' | 'logo' | 'logo-after' | 'menu' | 'arrow-right-with-tail' | 'arrow-up-with-tail' | 'bamboo' | 'shield' | 'planet-nature' | 'leaf' | 'waves' | 'fire' | 'arrow-down' | 'arrow-down-2' | 'arrow-left' | 'arrow-right',
     color?: Color,
     className?: string
 }

@@ -38,9 +38,10 @@
     @include color-variations('green', '105, 107, 54');
     @include color-variations('green-2', '81, 82, 36');
     @include color-variations('black', '18, 18, 18');
+    @include color-variations('black-2', '54, 54, 55');
     @include color-variations('orange-2', '182, 161, 135');
-    @include color-variations('yellow', '229, 235, 0, 1');
-    @include color-variations('yellow-2', '141, 115, 55, 1');
+    @include color-variations('yellow', '229, 235, 0');
+    @include color-variations('yellow-2', '141, 115, 55');
     @include color-variations('orange', '171, 142, 76');
 
 

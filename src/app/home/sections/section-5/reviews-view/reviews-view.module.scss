@@ -1,4 +1,4 @@
-
+@use '../../../../../shared/styles/breakpoints' as *;
 
 .reviews-view{
     width: 100%;
@@ -30,19 +30,36 @@
         height: 100%;
         position: relative;
         overflow: hidden;
+
+        &:not(:global(.open)){
+            :global(.card){
+                padding-top: 20px;
+                padding-bottom: 12px;
+            }
+            p {
+                max-height: 0px;
+                overflow: hidden;
+            }
+            :global(.button){
+                rotate: 180deg;
+            }
+        }
         
     }
 
     :global(.card){
+        --padding-lateral: 15px;
         position: absolute;
-        left: 15px;
-        bottom: 15px;
-        height: min(15.5rem, 30%);
+        left: var(--padding-lateral);
+        bottom: var(--padding-lateral);
+        max-height: min(15.5rem, 30%);
+        width: calc(100% - var(--padding-lateral) * 2);
         backdrop-filter: blur(var(--blur-md));
         padding: 31px 28px;
         display: flex;
         flex-direction: column;
         gap: 10px;
+        border-radius: var(--border-radius-sm);
         h3{
             text-align: start;
             font-size: 1.8rem;
@@ -51,6 +68,66 @@
         p{
             font-size: 1.45rem;
             text-align: start;
+        }
+
+        :global(.button){
+            position: absolute;
+            right: 15px;
+            bottom: 12px;
+            height: 38px;
+            width: 38px;
+            --padding-vertical: 12px;
+        }
+    }
+
+    @media screen and (width > $md) {
+        padding: 0 50px;
+        padding-top: 24px;
+        padding-bottom: 36px;
+        gap: 38px !important;
+        
+
+        :global(.review-item){
+            flex: 1 0 24.8%;
+            padding: 12px;
+                        
+
+            img{
+                inset: 0;
+
+                position: absolute;
+                object-fit: cover;
+                width: 100%;
+            }
+            
+            :global(.card){
+                padding: 40px 50px 85px 34px;
+                max-height: min(23rem, 40%);
+                gap: 24px;
+
+                :global(.button){
+                    right: 17px;
+                    bottom: 17px;
+                    width: 52px;
+                    height: 52px;
+                    --padding-vertical: 16px;
+                }
+
+                h3{
+
+                }
+
+                p{
+                    line-height: 1.6em;
+                }
+            }
+            
+            &:not(:global(.open)){
+
+                :global(.card){
+                    padding-top: 3rem;
+                }
+            }
         }
     }
 }

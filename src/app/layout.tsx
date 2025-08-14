@@ -28,7 +28,7 @@ export default function RootLayout({
             __html: `window.addEventListener('load', () => setTimeout(() => {
                 document.querySelector('.loader')?.classList.remove('show');
                 document.dispatchEvent(new Event('loader-hidden'));
-              }, 100));  `
+              }, 200));  `
           }}
         />
       </body>

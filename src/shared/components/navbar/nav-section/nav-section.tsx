@@ -19,9 +19,9 @@ export const NavSection = ({ openState }: { openState: boolean }) => {
                     <a className={`${path === '/products/bamboo' ? 'active' : ''}`} href="/products/bamboo">Synthetic Bamboo</a>
                 </div>
             </div>
-            <a className={`${path === '/about-us' ? 'active' : ''}`} href="/about-us">About Us</a>
-            <a className={`${path === '/technology' ? 'active' : ''}`} href="/technology">Technology</a>
-            <a className={`${path === '/contact-us' ? 'active' : ''}`} href="/contact-us">Contact Us</a>
+            <a className={`${path === '/about-us' ? 'active' : ''} `} href="/about-us">About Us</a>
+            <a className={`${path === '/technology' ? 'active' : ''}  hide-min-md`} href="/technology">Technology</a>
+            <a className={`${path === '/contact-us' ? 'active' : ''}  hide-min-md`} href="/contact-us">Contact Us</a>
             <div className="extra-sites hide-min-md">
                 <a href="/privacy-policy">Privacy Policy</a>
                 <a href="/terms-of-service">Terms & Conditions</a>

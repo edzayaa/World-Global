@@ -1,3 +1,4 @@
+@use '../../../../shared/styles/breakpoints' as *;
 
 .section-5{
     height: 100%;
@@ -35,5 +36,18 @@
         height: 100%;
         flex: 1;
         overflow: hidden;
+    }
+
+    @media screen and (width > $md) {
+        padding-top: 18rem;
+        gap: 32px;
+
+        :global(.title){
+            font-size: 7rem;
+        }
+
+        :global(.description){
+            font-size: 1.9rem;
+        }
     }
 }

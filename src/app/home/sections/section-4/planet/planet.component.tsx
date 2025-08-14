@@ -1,7 +1,9 @@
+'use client';
 import { inFromScaleZero } from '@/shared/components/animated-container/libs/Animations';
 import style from './planet.module.scss';
 import { CSSProperties, RefObject, useEffect, useRef } from "react";
 import { OnScrollInFn } from '@/shared/components/animated-container/libs/OnScrollFn';
+import breakpoints from '@/shared/types/breakpoints';
 
 interface IndicatorItem {
   ref: RefObject<HTMLDivElement|null>,
@@ -10,12 +12,21 @@ interface IndicatorItem {
     position: 'top' | 'bottom' ,
     alignment: 'start' | 'center' | 'end',
     padding: number,
-    text: string
+    text: string,
+    desktopVersion?: {
+      position: 'top' | 'bottom',
+      alignment: 'start' | 'center' | 'end',
+      padding: number
+    }
   },
   point: {
     ref: RefObject<HTMLDivElement|null>,
     position: { x: number, y: number },
     size: number
+    desktopVersion?: {
+      position: {x: number, y: number },
+      size: number
+    }
   }
 }
 
@@ -29,7 +40,12 @@ export function PlanetComponent() {
         position: 'bottom',
         alignment: 'end',
         text: 'Eco-Friendly Resorts',
-        padding: 2
+        padding: 2,
+        desktopVersion: {
+          position: 'top',
+          alignment: 'center',
+          padding: 2
+        }
       },
       point:{
         position:{
@@ -37,7 +53,12 @@ export function PlanetComponent() {
           y: 18
         },
         size: 16,
-        ref: useRef<HTMLDivElement>(null)
+        ref: useRef<HTMLDivElement>(null),
+        desktopVersion: {
+          position: { x: 7.5, y: 22 },
+          size: 54
+        }
+        
       }
     },
     {
@@ -47,7 +68,12 @@ export function PlanetComponent() {
         position: 'top',
         alignment: 'start',
         padding: 1,
-        text: 'Fire resistant for cruise ship like eco-friendly resort'
+        text: 'Fire resistant for cruise ship like eco-friendly resort',
+        desktopVersion: {
+          position: 'top',
+          alignment: 'center',
+          padding: 3
+        }
       },
       point:{
         position:{
@@ -55,7 +81,14 @@ export function PlanetComponent() {
           y: 22
         },
         size: 20,
-        ref: useRef<HTMLDivElement>(null)
+        ref: useRef<HTMLDivElement>(null),
+        desktopVersion: {
+          position: {
+            x: 99,
+            y: 47
+          },
+          size: 32
+        }
       }
     },
     {
@@ -66,6 +99,11 @@ export function PlanetComponent() {
         alignment: 'center',
         padding: 3,
         text: 'Attraction Park',
+        desktopVersion: {
+          position: 'top',
+          alignment: 'center',
+          padding: 3
+        }
       },
       point:{
         ref: useRef<HTMLDivElement>(null),
@@ -73,7 +111,11 @@ export function PlanetComponent() {
           x: 29,
           y: 60
         },
-        size: 10
+        size: 10,
+        desktopVersion: {
+          position: { x: 36, y: 43 },
+          size: 44
+        }
       }
     },
     {
@@ -84,6 +126,11 @@ export function PlanetComponent() {
         alignment: 'center',
         padding: 2,
         text: 'Sustainable Homes',
+        desktopVersion: {
+          alignment: 'center',
+          position: 'top',
+          padding: 2
+        }
       },
       point:{
         ref: useRef<HTMLDivElement>(null),
@@ -91,7 +138,11 @@ export function PlanetComponent() {
           x: 70,
           y: 94
         },
-        size: 15
+        size: 15,
+        desktopVersion:{
+          position: { x: 86, y: 17 },
+          size: 52
+        }
       }
     },
     {
@@ -102,7 +153,11 @@ export function PlanetComponent() {
           x: 82,
           y: 66
         },
-        size: 6
+        size: 6,
+        desktopVersion: {
+          position: { x: 42, y: 2 },
+          size: 38
+        }
       }
     },
     {
@@ -113,7 +168,26 @@ export function PlanetComponent() {
           x: 24,
           y: 91
         },
-        size: 8
+        size: 8,
+        desktopVersion: {
+          position: { x: 42, y: 2 },
+          size: 38
+        }
+      }
+    },
+    {
+      ref: useRef<HTMLDivElement>(null),
+      point:{
+        ref: useRef<HTMLDivElement>(null),
+        position: {
+          x: 24,
+          y: 91
+        },
+        size: 8,
+        desktopVersion: {
+          position: { x: 7, y: 49},
+          size: 26
+        }
       }
     }
   ];
@@ -137,7 +211,7 @@ export function PlanetComponent() {
 
 
   function animateIndicators(indicator: RefObject<HTMLDivElement|null>, index: number) {
-    if (!indicator.current) return;
+    if (!indicator.current) return null;
 
     window.addEventListener('planet-ready', () => {
       setTimeout(() => {
@@ -146,8 +220,17 @@ export function PlanetComponent() {
     })
   }
 
-  function createIndicator(item: IndicatorItem | null, index: number) {
-    if (!item) return null;
+  function createIndicator(item: IndicatorItem | null, index: number) {debugger
+    if (!item || typeof window === 'undefined') return null;
+
+    const screenWidth = window.innerWidth;
+    if(screenWidth > breakpoints.md){
+        if (!item.point.desktopVersion) return;
+      return <div key={index} className="indicator-item" style={{'--position-x': `${item.point.desktopVersion?.position.x}%`, '--position-y': `${item.point.desktopVersion.position.y}%` } as CSSProperties} ref={item.ref}>
+        <div ref={item.point.ref} className={`point`} style={{'--size': `${item.point.desktopVersion!.size}px`} as CSSProperties}></div>
+        {item.label?.desktopVersion ? <div ref={item.label.ref} style={{'--padding': `${item.label.desktopVersion.padding}em`} as CSSProperties} className={`label align-${item.label.desktopVersion.alignment} position-${item.label.desktopVersion.position}`}>{item.label.text}</div> : null}
+      </div>;
+    }
 
     return (
       <div key={index} className="indicator-item" style={{'--position-x': `${item.point.position.x}%`, '--position-y': `${item.point.position.y}%` } as CSSProperties} ref={item.ref}>

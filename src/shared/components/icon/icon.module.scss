@@ -36,6 +36,9 @@
     &:global(.icon-arrow-right-with-tail){
         mask-image: url('/icons/arrow-right-with-tail.svg');
     }
+    &:global(.icon-arrow-up-with-tail){
+        mask-image: url('/icons/arrow-up-with-tail.svg');
+    }
     &:global(.icon-shield){
         mask-image: url('/icons/shield.svg');
     }
@@ -58,6 +61,15 @@
     }
     &:global(.icon-arrow-down){
         mask-image: url('/icons/arrow-down.svg');
+    }
+    &:global(.icon-arrow-left){
+        mask-image: url('/icons/arrow-left.svg');
+    }
+    &:global(.icon-arrow-right){
+        mask-image: url('/icons/arrow-right.svg');
+    }
+    &:global(.icon-arrow-down-2){
+        mask-image: url('/icons/arrow-down-2.svg');
     }
     &:global(.icon-close){
         mask-image: url('/icons/close.svg');
