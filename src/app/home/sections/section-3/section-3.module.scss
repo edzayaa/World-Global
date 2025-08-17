@@ -1,3 +1,5 @@
+@use '../../../../shared/styles/breakpoints' as *;
+
 .section-3{
     display: flex;
     gap: 12px;
@@ -200,7 +202,9 @@
             h1{
                 font-size: 5rem;
                 line-height: 1em;
+                font-weight: 500;
             }
+
         }
 
         :global(.subtitle){
@@ -239,5 +243,7 @@
             }
         }
     }
+
+
 
 }

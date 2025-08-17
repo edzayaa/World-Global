@@ -6,6 +6,7 @@ import { AnimatedContainer } from '@/shared/components/animated-container/animat
 import { Icon } from '@/shared/components/icon/icon';
 import gsap from 'gsap';
 import ScrollTrigger from 'gsap/ScrollTrigger'
+import { fstat } from 'fs';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -91,79 +92,78 @@ export const ItemSvg = ({ signalStart }: { signalStart: boolean }) => {
                 ctx.drawImage(images[0], 0,0, canvas.width, canvas.height);
             }
         }
+
+        const frameObject = { frame: 0};
+
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: videoSpacerRef.current!,
+                scroller: videoWrapperRef.current!,
+                start: `top top`,
+                end: `bottom bottom`,
+                scrub: 0.1,
+                pinSpacing: false,                
+            }
+        })
+        .fromTo(frameObject,
+            { 
+                frame: 0 
+            }, 
+            {
+                frame: totalFrame - 1,
+                onUpdate: () => {
+                    if(!canvas) return;
+                    const frameIndex = Math.floor(frameObject.frame);
+                    ctx?.clearRect(0, 0, canvas?.width, canvas?.height);
+                    ctx?.drawImage(images[frameIndex], 0, 0, canvas?.width, canvas?.height);
+                },
+            }, 
+        )
         
-       
-
-        ScrollTrigger.create({
-            trigger: videoSpacerRef.current!,
-            scroller: videoWrapperRef.current!,
-            start: `top top`,
-            end: `bottom bottom`,            
-            scrub:  .1,
-            
-            onUpdate: (self => {
-                
-                if(!canvas) return;
-
-                const baseProgress = self.progress < 0.0001 ? 0 : self.progress
-                const progress = gsap.parseEase('power1.out')(baseProgress);
-
-                const frameIndex = Math.floor(progress * (totalFrame - 1));
-                ctx?.clearRect(0,0, canvas?.width, canvas?.height);
-                ctx?.drawImage(images[frameIndex], 0,0, canvas?.width, canvas?.height);
-
-                if (frameIndex == totalFrame) {
-                    videoCanvasRef.current?.classList.remove('video-active');
-                } else {
-                    videoCanvasRef.current?.classList.add('video-active');
-                }
-                
-            }),
-
-        })
-
-
-
-        ScrollTrigger.create({
-            trigger: svgSpacerRef.current!,
-            scroller: videoWrapperRef.current!,
-            start: `top top`,
-            end: `bottom bottom`,
-            scrub:  .1,
-            onUpdate: (self)=>{
-                const progress = self.progress;
-
-                bgBackdropRef.current!.style.opacity = `${progress * 100}%`;
-
-                groupLines.current!.style.maskSize = `${progress * 100}% ${progress * 100}%`;
+        const tl2 = gsap.timeline({
+            scrollTrigger: {
+                trigger: videoSpacerRef.current!,
+                scroller: videoWrapperRef.current!,
+                start: '95% bottom',
+                end: 'bottom bottom',
+                scrub: 0.1,
+                pinSpacing: false,                
             }
-        });
-
-        ScrollTrigger.create({
-            trigger: indicatorsSpacerRef.current!,
-            scroller: videoWrapperRef.current!,
-            start: `top top`,
-            end: `bottom bottom`,
-            scrub:  .1,
-            onUpdate: (self) => {
-                const progress = self.progress;
-                
-                const points: HTMLElement[] = Array.from(document.querySelectorAll('.bg-wrapper svg .feature-item .point-indicator'));
-                points.forEach(point => {
-                    point.style.opacity = `${progress * 100}%`;
-                    point.style.transform = `translateY(${(1 - progress) * 300}px)`;
-                });
-            
-                const indicatorsLabel: HTMLElement[] = Array.from(document.querySelectorAll('.bg-wrapper svg .feature-item .feature-content'));
-                indicatorsLabel.forEach(label => {
-                    label.style.opacity = `${progress * 100}%`;
-                    label.style.transform = `translateX(${(1 - progress) * -300}px)`;
-                });
-
-            }
-
-        })
-
+        }).fromTo(bgBackdropRef.current!,
+            {
+                opacity: 0
+            }, {
+                opacity: 1,
+            }, 
+        ).fromTo(groupLines.current!, 
+            {
+                maskSize: '0% 0%'
+            },
+            {
+                maskSize: '100% 100%'
+            },
+            "<"
+        ).fromTo(Array.from(document.querySelectorAll('.bg-wrapper svg .feature-item .point-indicator')),
+            {
+                opacity: 0,
+                y: 300
+            },
+            {
+                opacity: 1,
+                y: 0,
+                stagger: 0.2
+            },">"
+        ).fromTo(Array.from(document.querySelectorAll('.bg-wrapper svg .feature-item .feature-content')),
+            {
+                opacity: 0,
+                y: 300
+            },
+            {
+                opacity: 1,
+                y: 0,
+                stagger: 0.2
+            },">"
+        )
     }
 
     function handleScaleFunction() {
@@ -240,19 +240,16 @@ export const ItemSvg = ({ signalStart }: { signalStart: boolean }) => {
 
             <div className="video-bg" >
                 <canvas className='video-active video-canvas' ref={videoCanvasRef}></canvas>                
-                <div className="videoWrapper" ref={videoWrapperRef}>
-                    <div className="offsetSpacer" style={{'height': `${offsetContainer}px`}}></div>
-                    <div className="videoSpacer" style={{'height': `${videoDuration}px`}} ref={videoSpacerRef}></div>
-                    <div className="svgSpacer" ref={svgSpacerRef} style={{'height': `${svgDuration}px`}}></div>
-                    <div className="indicatorSpacer" style={{'height': `${indicatorsDuration}px`}} ref={indicatorsSpacerRef}></div>
-                    <div className="offsetSpacer" style={{'height': `${offsetContainer}px`}}></div>
+                <div className="videoWrapper" ref={videoWrapperRef}>            
+                    <div className="offset" style={{height: '30px'}}> </div>
+                    <div className="spacer" ref={videoSpacerRef} style={{height: `calc(${totalFrame * 50}px + 100dvh)`}}></div>
+
                 </div>
             </div>
             <div className="bg-backdrop" ref={bgBackdropRef}></div>
             <svg ref={internalSvgRef} viewBox='0 0 1920 1080' preserveAspectRatio='xMidYMid slice' xmlns='http://www.w3.org/2000/svg'>
 
-                {/* <image href="/videos/home/1.webp" width={1920} height={1080} /> */}
-                <rect x="0" y="0" width="100%" height="100%" fill="black" opacity="0.2" />
+                
                 <g ref={groupLines} >
                     {lines.map((line, index) => {
 

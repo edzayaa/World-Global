@@ -10,7 +10,7 @@ import { ReviewsView } from './reviews-view/reviews-view';
 import { Card } from '@/shared/components/card/card';
 import gsap from 'gsap';
 
-export const Section5 = ({spacerRef}: {spacerRef: RefObject<HTMLElement|null>}) => {
+export const Section5 = () => {
 
     const internalRef = useRef<HTMLDivElement | null>(null);
     const titleRef = useRef<HTMLDivElement | null>(null);
@@ -22,50 +22,29 @@ export const Section5 = ({spacerRef}: {spacerRef: RefObject<HTMLElement|null>}) 
     },[])
 
     function animate(){
-        gsap.to(internalRef.current, {
-            opacity: 1,
-            scrollTrigger: {
-                trigger: spacerRef.current,
-                scroller: document.querySelector(`html`),
-                start: "top 80%",
-                end: "bottom bottom",
-                scrub: true
-            }
-        });
 
-        gsap.to(internalRef.current, {
-            translateY: () => spacerRef.current!.offsetHeight * -1.4,
+        gsap.timeline({
             scrollTrigger: {
-                trigger: spacerRef.current,
+                trigger: internalRef.current,
                 scroller: document.querySelector(`html`),
-                start: "bottom bottom",
-                end: "bottom top",
+                start: "top top",
+                end: "+=120%",
+                pin: true,
                 scrub: true,
-
-            }
-        });
-
-        gsap.fromTo(titleRef.current, { translateY: 150 }, {
-            translateY: 0,
-            scrollTrigger: {
-                trigger: spacerRef.current,
-                scroller: document.querySelector(`html`),
-                start: "top 80%",
-                end: "top 20%",
-                scrub: true,
-            }
-        });
-
-        gsap.fromTo(descriptionRef.current, { translateY: 150 }, {
-            translateY: 0,
-            scrollTrigger: {
-                trigger: spacerRef.current,
-                scroller: document.querySelector(`html`),
-                start: "top 80%",
-                end: "top 20%",
-                scrub: true,
+                
+                
             }
         })
+        .to(internalRef.current, {
+            opacity: 1,
+        })
+        .to({}, {duration: 2})
+        .fromTo(titleRef.current, { translateY: 150 }, {
+            translateY: 0,            
+        }, "<")
+        .fromTo(descriptionRef.current, { translateY: 150 }, {
+            translateY: 0,
+        }, "<")
 
 
     }
@@ -80,7 +59,7 @@ export const Section5 = ({spacerRef}: {spacerRef: RefObject<HTMLElement|null>}) 
                     <p>Snippets of clients reviews emphasizing quality and reliability.</p>
                 </div>
                 <div  className='reviews-container'>
-                    <ReviewsView spacerRef={spacerRef} />
+                    <ReviewsView spacerRef={internalRef} />
                 </div>
             </Card>
 

@@ -82,6 +82,7 @@
         padding-left: 38px;
         gap: 22px;
         padding-right: 12px;
+        transition: background-color ease-in-out var(--animation-speed-fast);
         span{
             font-size: 1.8rem;
         }
@@ -104,6 +105,14 @@
         padding-left: 32px;
         border-radius: var(--border-radius-md);
         max-width: 726px;
+        font-size: 1.8rem;
+
+        :global(.button){
+            span{
+                font-weight: 100;
+                font-size: 1.8rem;
+            }            
+        }
 
         i:global(.icon-logo-after){
             scale: 1.6;

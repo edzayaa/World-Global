@@ -69,8 +69,8 @@ export const ReviewsView = ({spacerRef}: {spacerRef: RefObject<HTMLElement | nul
             scrollTrigger: {
                 trigger: spacerRef.current,
                 scroller: document.querySelector(`html`),
-                start: 'top 80%',
-                end: 'top 20%',
+                start: 'top top',
+                end: '+=90%',
                 scrub: true
             }
         });

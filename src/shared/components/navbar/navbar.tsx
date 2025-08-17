@@ -29,7 +29,7 @@ export const Navbar = () => {
                 <Button className='button-menu-close hide-min-md' onClick={() => setOpenPanel(!openPanel)} >
                     <Icon icon={'close'} />
                 </Button>
-                <Button border className='quote-button hide-sm'>
+                <Button border className='quote-button hide-sm'  onClick={() => window.location.href = '/contact-us'}>
                     <span>Quote now</span>
                     <Button circle color={{color: 'orange', alpha: '100'}}>
                         <Icon color={{color: 'white', alpha: '100'}} icon='arrow-right-with-tail' />

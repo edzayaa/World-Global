@@ -3,27 +3,27 @@ $font-name: 'AEONIK';
 
 @font-face {
     font-family: #{$font-name};
-    src: url('#{$font-path}/aeoniktrial-bold.otf') format('opentype');
+    src: url('#{$font-path}/#{$font-name}-bold.ttf') ;
     font-weight: 700;
     font-style: normal;
 }
 
 @font-face {
     font-family: #{$font-name};
-    src: url('#{$font-path}/aeoniktrial-medium.otf') format('opentype');
+    src: url('#{$font-path}/#{$font-name}-medium.ttf') ;
     font-weight: 500;
     font-style: normal;
 }
 @font-face {
     font-family: #{$font-name};
-    src: url('#{$font-path}/#{$font-name}-light.otf') format('opentype');
+    src: url('#{$font-path}/#{$font-name}-light.ttf') ;
     font-weight: 300;
     font-style: normal;
 }
 
 @font-face {
     font-family: #{$font-name};
-    src: url('#{$font-path}/aeoniktrial-regular.otf') format('opentype');
+    src: url('#{$font-path}/#{$font-name}-regular.ttf') ;
     font-weight: 400;
     font-style: normal;
 }

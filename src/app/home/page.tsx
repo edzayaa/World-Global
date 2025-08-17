@@ -28,28 +28,16 @@ export default function HomeView() {
     }));
 
 
-    return (
-        <Fragment>
-            <Fragment>
-                <Section1 spacerRef={sectionsSpacersItems[0].refSpacer} ref={sectionsSpacersItems[0].refSection} />
-                <Section2 spacerRef={sectionsSpacersItems[1].refSpacer} ref={sectionsSpacersItems[1].refSection} />
-                <Section4 spacerRef={sectionsSpacersItems[2].refSpacer} ref={sectionsSpacersItems[2].refSection} />
-                <Section5 spacerRef={sectionsSpacersItems[3].refSpacer} />
-                <Section6 spacerRef={sectionsSpacersItems[4].refSpacer} />
-                <Footer spacerRef={sectionsSpacersItems[5].refSpacer}  image="/images/footer/home.png"/>
-            </Fragment>
-            <div className="sections-wrapper">
-                <div className="section-spacer" ref={sectionsSpacersItems[0].refSpacer}></div>
-                <div className="section-spacer" ref={sectionsSpacersItems[1].refSpacer}></div>
-                <div className="section-spacer" ref={sectionsSpacersItems[2].refSpacer}></div>
-                <div className="section-spacer" ref={sectionsSpacersItems[3].refSpacer}></div>
-                <div className="section-spacer" ref={sectionsSpacersItems[4].refSpacer}></div>
-                <div className="section-spacer" ref={sectionsSpacersItems[5].refSpacer}></div>
-            </div>
-            
-            
-        </Fragment>
-        
-    )
-    
+    return (<>  
+                <Section1  />
+                <Section2  />
+                <Section4  />
+                <Section5 />
+                <Section6 />
+                <Footer  image="/images/footer/home.png"/>
+
+            </>
+
+        )
+
 }

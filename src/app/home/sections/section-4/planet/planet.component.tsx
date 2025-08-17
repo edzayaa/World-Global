@@ -204,128 +204,73 @@ export function PlanetComponent({spacerRef}: {spacerRef: RefObject<HTMLDivElemen
 
   useEffect(() =>{ 
     if(!internalRef.current) return;
-
-    // inFromScaleZero.set(ref.current!);
-  
-    // indicatorsItems.forEach((item, index) => {
-    //   inFromScaleZero.set(item.ref.current!);
-    //   animateIndicators(item.ref, index);
-    // });
-
-    // OnScrollInFn(ref.current!, () => {
-    //   inFromScaleZero.fn(ref.current!);
-    //   window.dispatchEvent(new Event('planet-ready'));
-    // });
-
     animate();
   }, [screenWidth])
 
 
-  function animateIndicators(indicator: RefObject<HTMLDivElement|null>, index: number) {
-    if (!indicator.current) return null;
-
-    // window.addEventListener('planet-ready', () => {
-    //   setTimeout(() => {
-    //     inFromScaleZero.fn(indicator.current!);        
-    //   }, index * 400);
-    // })
-  }
-
   function animate(){
     if (!planetRef.current) return;
-    
-    gsap.fromTo(planetRef.current, {
+
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: spacerRef.current,
+        scroller: document.querySelector(`html`),
+        start: "top top",
+        end: "+=110%",
+        scrub: true,
+      }
+    })
+    .fromTo(planetRef.current, {
       rotate: -60,
     }, {
       rotate: 0,
-      scrollTrigger: {
-        trigger: spacerRef.current,
-        scroller: document.querySelector(`html`),
-        start: "top 80%",
-        end: "top 40%",
-        scrub: true,        
-      }
-    });
-
-    
-    gsap.to(planetRef.current, {
-      rotate: -60,
-      scrollTrigger: {
-        trigger: spacerRef.current,
-        scroller: document.querySelector(`html`),
-        start: "bottom 80%",
-        end: "bottom top",
-        scrub: true
-      }
-    });
-
-
-    gsap.fromTo(
+    })
+    .fromTo(
       indicatorsItems.map(item => item.point.ref.current),
       {opacity: 0, scale: 0},
       {
         opacity: 1, 
         scale: 1, 
         stagger: 0.2,
-        scrollTrigger: {
-          trigger: spacerRef.current,
-          scroller: document.querySelector(`html`),
-          start: "top 50%",
-          end: "top 20%",
-          scrub: true,
-        }
-      }
-    );
+        
+      }, "<"
+    )
+    .fromTo(
+    indicatorsItems.map(item => item.label?.ref.current), 
+    {
+      opacity: 0, 
+      translateY: -50
+    },{
+      stagger: 0.4,
+      opacity: 1,
+      translateY: 1,
+    }, "<")
 
-    gsap.fromTo(
-      indicatorsItems.map(item => item.label?.ref.current), 
-      {
-        opacity: 0, 
-        translateY: -50
-      },{
-        stagger: 0.4,
-        opacity: 1,
-        translateY: 1,
-        scrollTrigger: {
-          trigger: spacerRef.current,
-          scroller: document.querySelector(`html`),
-          start: "top 30%",
-          end: "top 20%",
-          scrub: true,
-        }
-      });
-
-    gsap.to(
+    .to(
       indicatorsItems.map(item => item.point.ref.current),
       {
         opacity: 0,
         scale: 0,
         stagger: 0.2,
-        scrollTrigger:{
-          scrub: true,
-          trigger: spacerRef.current,
-          scroller: document.querySelector(`html`),
-          start: 'bottom 70%',
-          end: '-=15%'
-        }
-      }
-    );
+        
+      }, ">"
+    )
 
-    gsap.to(
+    .to(
       indicatorsItems.map(item => item.label?.ref.current),
       {
         opacity: 0,
         scale: 0,        
         stagger: 0.2,
-        scrollTrigger:{
-          trigger: spacerRef.current,
-          scroller: document.querySelector(`html`),
-          start: 'bottom 70%',
-          end: 'bottom top',
-          scrub: true,
-        }
-      }
-    );
+        
+      }, "<"
+    ).to(planetRef.current, {
+      rotate: -60,
+      opacity: 0
+    }, ">")
+    .to(internalRef.current, {
+      opacity: 0
+    }, "<")
     
   }
 

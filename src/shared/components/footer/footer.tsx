@@ -8,7 +8,7 @@ import { RefObject, useEffect, useRef } from 'react';
 import gsap from 'gsap';
 
 
-export const Footer = ({image, spacerRef}: {image: string, spacerRef: RefObject<HTMLDivElement | null>}) => {
+export const Footer = ({image}: {image: string}) => {
 
     const activePath = usePathname();
 
@@ -17,22 +17,11 @@ export const Footer = ({image, spacerRef}: {image: string, spacerRef: RefObject<
     const sectionRef2 = useRef<HTMLDivElement | null>(null);
 
     useEffect(() => {
-        spacerRef.current!.style.flex = `0 0 ${internalRef.current?.offsetHeight}px`;
         animate();
     }, [])
 
     function animate(){
-        gsap.fromTo(internalRef.current, { opacity: 0 }, {
-            opacity: 1,
-            scrollTrigger: {
-                trigger: spacerRef.current,
-                scroller: document.querySelector(`html`),
-                start: "top top",
-                end: "bottom bottom",
 
-                markers: true
-            }
-        });
 
     }
 

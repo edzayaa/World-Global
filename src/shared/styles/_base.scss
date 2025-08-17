@@ -15,12 +15,10 @@ html{
 
 body{
     height: 100dvh;
-    width: 100dvw;
-    display: flex;
-    flex-direction: column;
+    width: 100dvw;    
     font-size: 1.6rem;
     background-color: var(--color-white);
-    font-family: 'AeonikTRIAL-Regular', sans-serif;
+    font-family: 'AEONIK', sans-serif;
 
     &::-webkit-scrollbar{
         display: none;

@@ -10,10 +10,11 @@
     gap: 12px;
     position: relative;
     scroll-snap-type: x mandatory;
+    user-select: none;
 
         &::-webkit-scrollbar{
             display: auto;
-            height: 1px;
+            height: 3px;
             background-color: var(--color-white-alpha-25) !important;
         }
 
@@ -82,7 +83,7 @@
 
     @media screen and (width > $md) {
         padding: 0 50px;
-        padding-top: 24px;
+        
         padding-bottom: 36px;
         gap: 38px !important;
         

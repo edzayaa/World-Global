@@ -91,7 +91,7 @@
                 gap: 4px;
 
                 i {
-                    translate: 0 2px;
+                    translate: 0 6px;
                     font-size: .7rem;
                 }
 
@@ -113,6 +113,7 @@
                     a {
                         padding: 1.5rem 2rem 1.5rem 2rem;
                         background-color: var(--color-black-alpha-50);
+                        opacity: 1;
 
                         &:hover {
                             background-color: var(--color-black-alpha-30);
@@ -142,8 +143,10 @@
 
         a,
         :global(.product-label) {
-            font-size: 1.55rem;
+            font-size: 1.8rem;
+            font-weight: 100;
             text-wrap: nowrap;
+            transition: opacity var(--animation-speed-fast) ease-in-out;
         }
 
         a:hover{

@@ -8,6 +8,7 @@
     overflow: hidden;    
     gap: 30px;
     background-color: var(--color-white);
+    opacity: 1;
 
     :global(.photos-wrapper){
         width: 100%;
@@ -48,6 +49,14 @@
           --padding-top: 28px;
           --padding-bottom: 106px;
           padding: var(--padding-top);
-          max-height: calc(536px + var(--padding-top) + var(--padding-bottom));
+          max-height: 536px;
+          :global(.photos-wrapper){              
+              gap: 2.8rem;
+          }
+          
+
+          img{
+            border-radius: inherit;
+          }
     }
 }

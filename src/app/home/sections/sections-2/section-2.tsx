@@ -8,90 +8,58 @@ import { Icon } from '@/shared/components/icon/icon';
 import gsap from 'gsap';
 import { title } from 'process';
 
-export const Section2 = forwardRef<HTMLDivElement | null, {spacerRef: RefObject<HTMLDivElement | null>}>(({spacerRef}, ref) => {
+export const Section2 = forwardRef<HTMLDivElement | null >((props, ref) => {
 
     const internalRef = useRef<HTMLDivElement | null>(null);
     const titleRef = useRef<HTMLDivElement | null>(null);
     const featuresRef = useRef<HTMLDivElement | null>(null);
     const sectionRef = useRef<HTMLDivElement | null>(null);
 
-    useEffect(() => {
-        
+        useEffect(() => {
+            
         animate();
     }, []);
     
     function animate(){
 
-         gsap.to(internalRef.current, {
-            opacity: 1,
+        const tlStart = gsap.timeline({
             scrollTrigger: {
-                trigger: spacerRef.current,
+                trigger: internalRef.current,
                 scroller: document.querySelector(`html`),
-                start: "top 80%",
-                end: "bottom bottom",
-                scrub: true                
-            }
-        });
-
-        gsap.to(internalRef.current, {
-            opacity: 0,
-            scrollTrigger: {
-                trigger: spacerRef.current,
-                scroller: document.querySelector(`html`),
-                start: "bottom 80%",
-                end: "bottom top",
-                scrub: true,                    
+                start: "top top",
+                end: "+=140%",
+                pin: true,
+                scrub: true,                                                
+                
                 
             }
-        });
-
-        gsap.fromTo(titleRef.current, 
+        }).fromTo(internalRef.current, {
+            opacity: 0,
+        }, {opacity: 1})
+        .fromTo(titleRef.current, 
             {
                 translateY: -100
             },
             {
                 translateY: 0,
-                scrollTrigger: {
-                    trigger: spacerRef.current,
-                    scroller: document.querySelector(`html`),
-                    start: "top 80%",
-                    end: "top 20%",                    
-                    scrub: true,                    
-                }
-            }
+            },
+            "<"
 
-        );
-        
-        gsap.fromTo(featuresRef.current, 
+        ).fromTo(featuresRef.current, 
             {
                 translateY: 100
             },
             {
                 translateY: 0,
-                scrollTrigger: {
-                    trigger: spacerRef.current,
-                    scroller: document.querySelector(`html`),
-                    start: "top 80%",
-                    end: "top 20%",                    
-                    scrub: true,                    
-                }
-            }
-        );
-
-        [titleRef.current!, featuresRef.current!].forEach((el) => {
-            gsap.to(el, {
-                translateY: -100,
-                opacity: 0,
-                scrollTrigger: {
-                    trigger: spacerRef.current,
-                    scroller: document.querySelector(`html`),
-                    start: "top top",
-                    end: "+=15%",
-                    scrub: true,
-                }
-            })}
+            }, "<"
         )
-
+        .to({}, {duration: 1})
+        .to(internalRef.current, {
+            opacity: 0,
+        }, ">")
+        .to([titleRef.current!, featuresRef.current!], {
+            translateY: -500,
+        }, "<")
 
     }
 

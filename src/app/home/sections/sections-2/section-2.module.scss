@@ -18,6 +18,7 @@
         h1{
             font-weight: 100;
             font-size: 3em;
+            color: var(--color-orange);
         }
     }
 
@@ -26,7 +27,7 @@
         
         p{
             font-weight: 100;
-            color: var(--color-green-alpha-50);
+            color: var(--color-orange-alpha-50);
         }
     }
 
@@ -77,10 +78,21 @@
         align-items: center;
         align-content: center;
         flex-wrap: wrap;
+        background-image: linear-gradient(to bottom, transparent 80%, var(--color-green-alpha-20));
 
+        :global(.overview){
+            color: var(--color-yellow-2);
+            font-size: 1.9rem;
+        }
+        
         :global(.title){
             flex: 1 0 100%;
-            font-size: 2.5rem;
+            h1{
+                color: var(--color-yellow-2);
+                font-weight: 400;
+                font-size: 8rem;
+            }
+
         }
 
         :global(.description){
@@ -91,6 +103,7 @@
             p{
                 max-width: 15%;
                 color: var(--color-black-alpha-70);
+                font-weight: 400;
             }
         }
 

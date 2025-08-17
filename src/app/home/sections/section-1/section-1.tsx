@@ -10,7 +10,8 @@ import { forwardRef, RefObject, useEffect, useImperativeHandle, useRef, useState
 import { InFromLeft, InFromRight, InFromTop } from "@/shared/components/animated-container/libs/Animations";
 import gsap from "gsap";
 import { ItemSvg } from "./svg-item/svg-item";
-export const Section1 = forwardRef(({spacerRef}: {spacerRef: RefObject<HTMLDivElement | null>}, ref) => {
+import { useRouter } from "next/router";
+export const Section1 = forwardRef((props, ref) => {
 
     const [signalInView, setSignalInView] = useState(false);
     const internalRef = useRef<HTMLDivElement>(null);
@@ -31,64 +32,42 @@ export const Section1 = forwardRef(({spacerRef}: {spacerRef: RefObject<HTMLDivEl
          gsap.to(internalRef.current, {
             opacity: 1,
             scrollTrigger: {
-                trigger: spacerRef.current,
+                trigger: internalRef.current,
                 scroller: document.querySelector(`html`),
                 start: "top 80%",
                 end: "top 20%",                    
-                scrub: true,
-                          
-            }
-        });
-
-        gsap.to(internalRef.current, {
-            opacity: 0,
-            scrollTrigger: {
-                trigger: spacerRef.current,
-                scroller: document.querySelector(`html`),
-                start: "bottom 80%",
-                end: "bottom top",
-                scrub: true,                    
-            }
-        });
-        
-
-        gsap.to(bgSectionRef.current, {
-            opacity: 0,
-            translateY: 30,
-            translateX: -30,
-            scrollTrigger: {
-                trigger: internalRef.current,
-                start: "top top",
-                end: "+=15%",
                 scrub: true,
                 
             }
         });
 
-        gsap.to(titleRef.current,
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: internalRef.current,
+                scroller: document.querySelector(`html`),
+                start: "top top",
+                end: "bottom top",
+                scrub: true,
+                pin: true,             
+                pinSpacing: false   
+            }
+        })
+        .to(bgSectionRef.current, {
+            opacity: 0,
+            y: 30,
+            x: -30,
+        })
+        .to(titleRef.current,
             {
                 opacity: 0,
-                translateY: -50,
-                scrollTrigger: {
-                    trigger: internalRef.current,
-                    start: "top top",
-                    end: "+=15%",
-                    scrub: true,
-                }
-            }
-        );
-
-        gsap.to(cardRef.current,
+                y: -50,
+            }, "<"
+        )
+        .to(cardRef.current,
             {
                 opacity: 0,
-                translateX: 50,
-                scrollTrigger: {
-                    trigger: internalRef.current,
-                    start: "top top",
-                    end: "+=15%",
-                    scrub: true,
-                }
-            }
+                x: 50,
+            }, "<"
         );
 
     }
@@ -110,7 +89,7 @@ export const Section1 = forwardRef(({spacerRef}: {spacerRef: RefObject<HTMLDivEl
                         <Card color={{color: 'black', alpha: '60'}} ref={cardRef}>
                             <h3>EcoThatch Excellence</h3>
                             <p>A global leader in premium synthetic thatch roofing and artificial bamboo, delivering durable, authentic, and innovative solutions for exceptional architectural designs.</p>
-                            <Button border>
+                            <Button border onClick={() => window.location.href = '/contact-us'}>
                                 <span>Get a free quote today</span>
                                 <Button circle color={{color: 'white', alpha: '100'}}>
                                     <Icon icon='arrow-right-with-tail' color={{color: 'green-2'}}></Icon>

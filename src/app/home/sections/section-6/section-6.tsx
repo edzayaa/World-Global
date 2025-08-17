@@ -7,7 +7,7 @@ import { ViewSection } from '@/shared/components/view-sections/view-sections';
 import { RefObject, useEffect, useRef } from 'react';
 import gsap from 'gsap';
 
-const Section6 = ({spacerRef}: {spacerRef: RefObject<HTMLElement|null>}) => {
+const Section6 = () => {
 
     const photos = [
         '1',
@@ -19,49 +19,13 @@ const Section6 = ({spacerRef}: {spacerRef: RefObject<HTMLElement|null>}) => {
 
     useEffect(() => {
         const height = internalRef.current?.offsetHeight || 0;
-        spacerRef.current!.style.flex = `0 0 ${height}px`;
-        spacerRef.current!.style.minHeight = 'unset';
+        internalRef.current!.style.flex = `0 0 ${height}px`;
+        internalRef.current!.style.minHeight = 'unset';
         animate();
     }, []);
 
     function animate(){
-        gsap.fromTo(internalRef.current, { 
-            opacity: 0 
-        }, {
-            opacity: 1,
-            scrollTrigger: {
-                trigger: spacerRef.current,
-                scroller: document.querySelector(`html`),
-                start: "top 150%",
-                end: "top 140%",
-                scrub: true
-            }
-        });
 
-        gsap.fromTo(internalRef.current, 
-            {translateY: () => window.innerHeight},
-            {
-                translateY: 0,
-                scrollTrigger: {
-                    trigger: spacerRef.current,
-                    scroller: document.querySelector(`html`),
-                    start: "top bottom",
-                    end: "bottom bottom",
-                    scrub: true,                    
-                }
-            }
-        );
-
-        gsap.to(internalRef.current, {
-            translateY: () => window.innerHeight * -1,
-            scrollTrigger: {
-                trigger: spacerRef.current,
-                scroller: document.querySelector(`html`),
-                start: "bottom bottom",
-                end: "bottom top",
-                scrub: true,
-            }
-        });
     }
     
     return (

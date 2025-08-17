@@ -12,7 +12,7 @@ import gsap from 'gsap';
 import { PlanetComponent } from './planet/planet.component';
 import { title } from 'process';
 
-export const Section4 = forwardRef<HTMLDivElement | null, {spacerRef: RefObject<HTMLDivElement | null>}>(({spacerRef}, ref) => {
+export const Section4 = forwardRef<HTMLDivElement | null >((props, ref) => {
 
     const [inView, setInView] = useState(false);
     const internalRef = useRef<HTMLDivElement | null>(null);
@@ -27,99 +27,52 @@ export const Section4 = forwardRef<HTMLDivElement | null, {spacerRef: RefObject<
     }, []);
 
     function animate(){
-         gsap.to(internalRef.current, {
-            opacity: 1,
+
+        const tl = gsap.timeline({
             scrollTrigger: {
-                trigger: spacerRef.current,
+                trigger: internalRef.current,
                 scroller: document.querySelector(`html`),
-                start: "top 80%",
-                end: "top 20%",                    
+                start: "top top",
+                end: "+=110%",
+                pin: true,
                 scrub: true,
-                          
+            
             }
-        });
-
-        gsap.to(internalRef.current, {
-            opacity: 0,
-            scrollTrigger: {
-                trigger: spacerRef.current,
-                scroller: document.querySelector(`html`),
-                start: "bottom 80%",
-                end: "bottom top",
-                scrub: true,                    
-            }
-        });
-
-        gsap.fromTo(titleRef.current, {
+        })
+        .to(internalRef.current,
+            {opacity: 1}
+        )
+        .fromTo(titleRef.current, {
             translateY: -200,
         },{
             translateY: 0,
-            scrollTrigger: {
-                trigger: spacerRef.current,
-                scroller: document.querySelector(`html`),
-                start: "top 80%",
-                end: "top 20%",
-                scrub: true,
-            }
-        })
-        gsap.fromTo(descriptionRef.current, {
+        }, "<")
+        .fromTo(descriptionRef.current, {
             translateY: -100,
         },{
-            translateY: 0,
-            scrollTrigger: {
-                trigger: spacerRef.current,
-                scroller: document.querySelector(`html`),
-                start: "top 80%",
-                end: "top 20%",
-                scrub: true,
-            }
-        })
-        gsap.fromTo(buttonRef.current, {
+            translateY: 0, 
+        }, "<")
+        .fromTo(buttonRef.current, {
             translateY: -50,
         },{
             translateY: 0,
-            scrollTrigger: {
-                trigger: spacerRef.current,
-                scroller: document.querySelector(`html`),
-                start: "top 80%",
-                end: "top 20%",
-                scrub: true,
-            }
-        })
-
-        gsap.to(titleRef.current, {
+        
+        }, "<")
+        .to({}, {duration: 1})
+        .to(titleRef.current, {
             opacity: 0,
             translateY: -200,
-            scrollTrigger: {
-                trigger: spacerRef.current,
-                scroller: document.querySelector(`html`),
-                start: 'top top',
-                end: '+=15%',
-                scrub: true,
-            }
-        })
-        gsap.to(descriptionRef.current, {
+        
+        }, ">")
+        .to(descriptionRef.current, {
             opacity: 0,
             translateY: -100,
-            scrollTrigger: {
-                trigger: spacerRef.current,
-                scroller: document.querySelector(`html`),
-                start: 'top top',
-                end: '+=15%',
-                scrub: true,
-            }
-        })
-        gsap.to(buttonRef.current, {
+        
+        }, "<")
+        .to(buttonRef.current, {
             opacity: 0,
-            translateY: -50,
-            scrollTrigger: {
-                trigger: spacerRef.current,
-                scroller: document.querySelector(`html`),
-                start: 'top top',
-                end: '+=15%',
-                scrub: true,
-            }
-        })
+            translateY: -50,        
+        }, "<")
         
     }
 
@@ -132,14 +85,14 @@ export const Section4 = forwardRef<HTMLDivElement | null, {spacerRef: RefObject<
                 <p>Key benefits such as reduced environmental impact, fire resistance, and pest deterrence.</p>
             </div>
             <div  ref={buttonRef}>
-                <Button border color={{color: 'white', alpha: '100'}}  borderColor={{color: 'green', alpha: '100'}} >
+                <Button onClick={() => window.location.href = '/contact-us'} border color={{color: 'white', alpha: '100'}}  borderColor={{color: 'green', alpha: '100'}} >
                     <span>Learn about our technology</span>
                     <Button circle color={{color: 'green', alpha: '100'}}>
                         <Icon icon={'arrow-right-with-tail'} ></Icon>
                     </Button>
                 </Button>
             </div>
-            <PlanetComponent spacerRef={spacerRef} />
+            <PlanetComponent spacerRef={internalRef} />
         </ViewSection>
 
     </>
