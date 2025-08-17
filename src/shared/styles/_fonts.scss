@@ -1,47 +1,29 @@
 $font-path: '/fonts';
-$font-name: 'AeonikTRIAL-';
+$font-name: 'AEONIK';
 
 @font-face {
-    font-family: #{$font-name}Bold;
+    font-family: #{$font-name};
     src: url('#{$font-path}/aeoniktrial-bold.otf') format('opentype');
     font-weight: 700;
     font-style: normal;
 }
 
 @font-face {
-    font-family: #{$font-name}BoldItalic;
-    src: url('#{$font-path}/aeoniktrial-bolditalic.otf') format('opentype');
-    font-weight: 700;
-    font-style: italic;
+    font-family: #{$font-name};
+    src: url('#{$font-path}/aeoniktrial-medium.otf') format('opentype');
+    font-weight: 500;
+    font-style: normal;
 }
-
 @font-face {
-    font-family: #{$font-name}Light;
-    src: url('#{$font-path}/aeoniktrial-light.otf') format('opentype');
+    font-family: #{$font-name};
+    src: url('#{$font-path}/#{$font-name}-light.otf') format('opentype');
     font-weight: 300;
     font-style: normal;
 }
 
-
 @font-face {
-    font-family: #{$font-name}LightItalic;
-    src: url('#{$font-path}/aeoniktrial-lightitalic.otf') format('opentype');
-    font-weight: 300;
-    font-style: italic;
-}
-
-@font-face {
-    font-family: #{$font-name}Regular;
+    font-family: #{$font-name};
     src: url('#{$font-path}/aeoniktrial-regular.otf') format('opentype');
     font-weight: 400;
     font-style: normal;
-}
-
-@font-face {
-    font-family: #{$font-name}RegularItalic;
-    src: url('#{$font-path}/aeoniktrial-regularitalic.otf') format('opentype');
-    font-weight: 400;
-    font-style: italic;
-    font-weight: 400;
-    font-style: italic;
 }

@@ -1,10 +1,10 @@
 'use client';
 import { inFromScaleZero } from '@/shared/components/animated-container/libs/Animations';
 import style from './planet.module.scss';
-import { CSSProperties, RefObject, useEffect, useRef } from "react";
+import { CSSProperties, RefObject, useEffect, useRef, useState } from "react";
 import { OnScrollInFn } from '@/shared/components/animated-container/libs/OnScrollFn';
 import breakpoints from '@/shared/types/breakpoints';
-
+import gsap from 'gsap';
 interface IndicatorItem {
   ref: RefObject<HTMLDivElement|null>,
   label?: {
@@ -30,7 +30,7 @@ interface IndicatorItem {
   }
 }
 
-export function PlanetComponent() {
+export function PlanetComponent({spacerRef}: {spacerRef: RefObject<HTMLDivElement | null>}) {
 
   const indicatorsItems: IndicatorItem[] = [
     {
@@ -192,38 +192,150 @@ export function PlanetComponent() {
     }
   ];
 
-  const ref = useRef<HTMLDivElement>(null);
+  const [screenWidth, setScreenWidth] = useState<number | null>(null);
+
+  const internalRef = useRef<HTMLDivElement>(null);
+  const planetRef = useRef<HTMLImageElement>(null);
+
+
+  useEffect(() => {
+    setScreenWidth(window.innerWidth);
+  }, [])
 
   useEffect(() =>{ 
-    inFromScaleZero.set(ref.current!);
+    if(!internalRef.current) return;
+
+    // inFromScaleZero.set(ref.current!);
   
-    indicatorsItems.forEach((item, index) => {
-      inFromScaleZero.set(item.ref.current!);
-      animateIndicators(item.ref, index);
-    });
+    // indicatorsItems.forEach((item, index) => {
+    //   inFromScaleZero.set(item.ref.current!);
+    //   animateIndicators(item.ref, index);
+    // });
 
-    OnScrollInFn(ref.current!, () => {
-      inFromScaleZero.fn(ref.current!);
-      window.dispatchEvent(new Event('planet-ready'));
-    });
+    // OnScrollInFn(ref.current!, () => {
+    //   inFromScaleZero.fn(ref.current!);
+    //   window.dispatchEvent(new Event('planet-ready'));
+    // });
 
-  }, [])
+    animate();
+  }, [screenWidth])
 
 
   function animateIndicators(indicator: RefObject<HTMLDivElement|null>, index: number) {
     if (!indicator.current) return null;
 
-    window.addEventListener('planet-ready', () => {
-      setTimeout(() => {
-        inFromScaleZero.fn(indicator.current!);        
-      }, index * 400);
-    })
+    // window.addEventListener('planet-ready', () => {
+    //   setTimeout(() => {
+    //     inFromScaleZero.fn(indicator.current!);        
+    //   }, index * 400);
+    // })
   }
 
-  function createIndicator(item: IndicatorItem | null, index: number) {debugger
-    if (!item || typeof window === 'undefined') return null;
+  function animate(){
+    if (!planetRef.current) return;
+    
+    gsap.fromTo(planetRef.current, {
+      rotate: -60,
+    }, {
+      rotate: 0,
+      scrollTrigger: {
+        trigger: spacerRef.current,
+        scroller: document.querySelector(`html`),
+        start: "top 80%",
+        end: "top 40%",
+        scrub: true,        
+      }
+    });
 
-    const screenWidth = window.innerWidth;
+    
+    gsap.to(planetRef.current, {
+      rotate: -60,
+      scrollTrigger: {
+        trigger: spacerRef.current,
+        scroller: document.querySelector(`html`),
+        start: "bottom 80%",
+        end: "bottom top",
+        scrub: true
+      }
+    });
+
+
+    gsap.fromTo(
+      indicatorsItems.map(item => item.point.ref.current),
+      {opacity: 0, scale: 0},
+      {
+        opacity: 1, 
+        scale: 1, 
+        stagger: 0.2,
+        scrollTrigger: {
+          trigger: spacerRef.current,
+          scroller: document.querySelector(`html`),
+          start: "top 50%",
+          end: "top 20%",
+          scrub: true,
+        }
+      }
+    );
+
+    gsap.fromTo(
+      indicatorsItems.map(item => item.label?.ref.current), 
+      {
+        opacity: 0, 
+        translateY: -50
+      },{
+        stagger: 0.4,
+        opacity: 1,
+        translateY: 1,
+        scrollTrigger: {
+          trigger: spacerRef.current,
+          scroller: document.querySelector(`html`),
+          start: "top 30%",
+          end: "top 20%",
+          scrub: true,
+        }
+      });
+
+    gsap.to(
+      indicatorsItems.map(item => item.point.ref.current),
+      {
+        opacity: 0,
+        scale: 0,
+        stagger: 0.2,
+        scrollTrigger:{
+          scrub: true,
+          trigger: spacerRef.current,
+          scroller: document.querySelector(`html`),
+          start: 'bottom 70%',
+          end: '-=15%'
+        }
+      }
+    );
+
+    gsap.to(
+      indicatorsItems.map(item => item.label?.ref.current),
+      {
+        opacity: 0,
+        scale: 0,        
+        stagger: 0.2,
+        scrollTrigger:{
+          trigger: spacerRef.current,
+          scroller: document.querySelector(`html`),
+          start: 'bottom 70%',
+          end: 'bottom top',
+          scrub: true,
+        }
+      }
+    );
+    
+  }
+
+  function createIndicator(item: IndicatorItem | null, index: number) {
+    if(item === null || item === undefined) return null;
+    if (typeof window === "undefined") return null; 
+    
+    const screenWidth = window?.innerWidth;
+    if(screenWidth === null) return null;
+    
     if(screenWidth > breakpoints.md){
         if (!item.point.desktopVersion) return;
       return <div key={index} className="indicator-item" style={{'--position-x': `${item.point.desktopVersion?.position.x}%`, '--position-y': `${item.point.desktopVersion.position.y}%` } as CSSProperties} ref={item.ref}>
@@ -240,8 +352,11 @@ export function PlanetComponent() {
     )
   }
 
+  if(screenWidth === null)
+    return null;
+
   return (
-    <div ref={ref} className={`planet-component ${style['planet-component']}`}>
+    <div ref={internalRef} className={`planet-component ${style['planet-component']}`}>
 
       <div className="planetWrapper">
         <div className="indicatorsWrapper">
@@ -253,7 +368,7 @@ export function PlanetComponent() {
           })()
           }
         </div>
-        <img src="/images/home/planet.png" alt="" />
+        <img src="/images/home/planet.png" alt="" ref={planetRef} />
       </div>
     </div>
   );

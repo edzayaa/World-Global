@@ -20,9 +20,7 @@
     --animation-speed-medium: .5s;
     --animation-speed-slow: .8s;
 
-    --font-regular: 'AeonikTRIAL-Regular';
-    --font-bold: 'AeonikTRIAL-Bold';
-    --font-light: 'AeonikTRIAL-Light';
+    --font: 'AEONIK';
 
     @mixin color-variations($name, $rgb) {
         --color-#{$name}: rgb(#{$rgb});
@@ -53,6 +51,12 @@
 
     }
 }
+
+// html:has(.video-active){
+//     &, body{
+//         overflow: hidden;
+//     }
+// }
 
 @mixin hide-variations($name, $sizeMin, $sizeMax) {
     @media screen and ($sizeMin < width < $sizeMax) {

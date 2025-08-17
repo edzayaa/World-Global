@@ -116,7 +116,24 @@
             margin: 0 32px;
 
         }
+
+        :global(.title-container){
+            display: inherit;
+            gap: inherit;
+            justify-content: inherit;
+            align-items: inherit;
+            flex-direction: inherit;
+            flex: 1 0 100%;
+            height: auto;
+            flex-wrap: inherit;
+
+        }
         
+        :global(.features-list){
+            display: inherit;
+            gap: inherit;
+            
+        }
     }
 
 }

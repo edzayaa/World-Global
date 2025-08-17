@@ -7,6 +7,7 @@
     width: 100%;
     overflow: hidden;    
     gap: 30px;
+    background-color: var(--color-white);
 
     :global(.photos-wrapper){
         width: 100%;
@@ -42,5 +43,11 @@
     @media screen and (width > $md) {          
           flex: 0 0 546px;
           overflow: hidden;
+          min-height: unset;
+          height: 100%;
+          --padding-top: 28px;
+          --padding-bottom: 106px;
+          padding: var(--padding-top);
+          max-height: calc(536px + var(--padding-top) + var(--padding-bottom));
     }
 }

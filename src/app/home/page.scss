@@ -1,0 +1,12 @@
+
+
+.sections-wrapper{
+    display: flex;
+    flex-direction: column;
+}
+
+.section-spacer{
+    min-height: 100dvh;
+    flex: 1 0 100dvh;
+    min-width: 100dvw;
+}
