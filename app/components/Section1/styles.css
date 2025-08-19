@@ -1,0 +1,45 @@
+.section1 {
+    background-color: blueviolet;
+    min-height: 100dvh;
+}
+
+.spacer {
+    height: 100vh;
+}
+
+.scroll-container {
+    background-color: red;
+    width: 100vw;
+    height: 100vh;
+    position: sticky;
+    top: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+canvas {
+    width: 100%;
+    height: auto;
+    
+}
+
+.text-container {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    transform: translateY(-50%);
+}
+
+.text-container h3 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    text-align: center;
+    font-size: 30px;
+    margin: 0;
+    color: white;
+    opacity: 0; /* GSAP controlará la opacidad de todos los elementos */
+}
