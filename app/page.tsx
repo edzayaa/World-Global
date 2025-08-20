@@ -6,6 +6,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollSmoother } from 'gsap/ScrollSmoother'; // Importa el plugin
 import Section1 from "./components/Section1/Section1";
 import Section2 from "./components/Section2/Section2";
+import Section2B from './components/Section2B/Section2B';
 
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
@@ -21,7 +22,7 @@ export default function Home() {
             // Crea una instancia de ScrollSmoother
             smoother.current = ScrollSmoother.create({
                 content: mainRef.current,
-                smooth: 1, // Puedes ajustar la suavidad (1 es un buen valor inicial)
+                smooth: 1.5, // Puedes ajustar la suavidad (1 es un buen valor inicial)
                 effects: true // Habilita efectos como parallax
             });
         }
@@ -39,6 +40,7 @@ export default function Home() {
             <div id="smooth-content" ref={mainRef}>
                 <Section1 />
                 <Section2 />
+                <Section2B/>
             </div>
         </div>
     );

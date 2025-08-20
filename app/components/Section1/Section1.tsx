@@ -81,9 +81,10 @@ const Section1 = () => {
                     trigger: '.scroll-container',
                     scrub: 0.5,
                     start: 'top top',
-                    end: 'bottom top',
+                    end: '+=1000', 
                     pin: true,
-                    markers: false
+                    markers: false,
+                    
                 }
             });
 
@@ -125,7 +126,7 @@ const Section1 = () => {
 		handleViewportResize()
 	}, [debouncedViewportSize])
     return (
-        <div ref={scopeRef} >
+        <div className='scope_section1' ref={scopeRef} >
             <div className="scroll-container">
                 <canvas ref={canvasRef} className="canvas_image_sequence" />
                 <div className="text-container">

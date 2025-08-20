@@ -27,14 +27,14 @@ const getPrevSection = (prevSectionClass, currentSectionElement) => {
     return null;
 };
 
-const Section2 = () => {
+const Section2B = () => {
     const containerRef = useRef(null);
     const first = useRef(null);
     const second = useRef(null);
 
     useGSAP(() => {
-        // Obtenemos la sección anterior de forma dinámica.
-        // Puedes pasar 'null' o dejarlo vacío para que busque el hermano anterior.
+        // Obtenemos una referencia al elemento que será nuestro 'pin' en la sección 1
+        // para que la segunda animación empiece después de que el 'pin' de la primera termine.
         const prevSection = getPrevSection(undefined, containerRef.current);
 
         if (!prevSection) return;
@@ -66,11 +66,11 @@ const Section2 = () => {
     }, { scope: containerRef }); 
 
     return (
-        <section ref={containerRef} className="section section2">
+        <section ref={containerRef} className="section section2B">
             <h2 ref={first}>TEXTO ENTRANDO POR ARRIBA</h2>
             <h3 ref={second}>TEXTO ENTRANDO POR DEBAJO</h3>
         </section>
     );
 };
 
-export default Section2;
+export default Section2B;
