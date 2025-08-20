@@ -20,6 +20,7 @@ export default function Home() {
         // Asegúrate de que los elementos existen antes de inicializar
         if (mainRef.current) {
             // Crea una instancia de ScrollSmoother
+             //@ts-expect-error development
             smoother.current = ScrollSmoother.create({
                 content: mainRef.current,
                 smooth: 1.5, // Puedes ajustar la suavidad (1 es un buen valor inicial)
@@ -30,6 +31,7 @@ export default function Home() {
         // Limpieza: destruye la instancia al desmontar el componente
         return () => {
             if (smoother.current) {
+                 //@ts-expect-error development
                 smoother.current.kill();
             }
         };

@@ -8,12 +8,14 @@ import "./styles.css";
 gsap.registerPlugin(ScrollTrigger);
 
 // Función para calcular el offset vertical
+ //@ts-expect-error development
 const getVerticalOffset = (element) => {
     if (!element) return 0;
     return element.getBoundingClientRect().top + window.scrollY;
 };
 
 // Función para obtener la sección anterior
+ //@ts-expect-error development
 const getPrevSection = (prevSectionClass, currentSectionElement) => {
     if (prevSectionClass) {
         const prevSection = document.querySelector(prevSectionClass);

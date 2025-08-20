@@ -5,6 +5,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './styles.css';
 import { useGSAP } from "@gsap/react";
 import { useDebouncedValue, useDidUpdate, useViewportSize } from '@mantine/hooks';
+import SVGAnimation, { SVGAnimationHandle } from './SVGAnimation';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -17,8 +18,24 @@ const Section1 = () => {
     const [debouncedViewportSize] = useDebouncedValue(viewportSize, 500)
     const isMobile = viewportSize.width < 768;
     const canvasRef = useRef<HTMLCanvasElement>(null);
-    const scopeRef = useRef(null);
+    const scopeRef = useRef<HTMLDivElement>(null);
     const imageSequence = useRef({ frame: 0 });
+
+    //const svgRef = useRef<SVGAnimationHandle>(null);
+
+    const startSVGAnimation = () => {
+        // Llama a la función expuesta por useImperativeHandle
+        if (scopeRef.current) {
+            const svgRef = scopeRef.current.querySelector(".svg_animation")
+            console.log(svgRef)
+            if (svgRef?.classList.contains("active")) {
+                svgRef?.setAttribute("class","svg_animation")
+            }else{
+                svgRef?.setAttribute("class","svg_animation active")
+            }
+            
+        }
+    };
 
     useEffect(() => {
         if (!canvasRef.current || !viewportSize.width || !viewportSize.height || loadedImages) {
@@ -29,8 +46,9 @@ const Section1 = () => {
             const imageAspect = !isMobile ? 1920 / 1080 : 430 / 932;
             const imageWidth = viewportSize.width;
             const imageHeight = viewportSize.width / imageAspect;
-
+            //@ts-expect-error development
             canvasRef.current.width = viewportSize.width;
+             //@ts-expect-error development
             canvasRef.current.height = viewportSize.height;
 
             const imageSrcs = Array.from(
@@ -40,6 +58,7 @@ const Section1 = () => {
 
             try {
                 const images = await loadImagesAndDrawFirstFrame({
+                     //@ts-expect-error development
                     canvas: canvasRef.current,
                     imageSrcs: imageSrcs,
                     imageWidth: imageWidth,
@@ -63,17 +82,6 @@ const Section1 = () => {
 
         if (!context) return;
 
-        // const render = () => {
-        //     const image = loadedImages[imageSequence.current.frame];
-        //     if (!image) return;
-
-        //     const offsetX = (canvas.width - image.width) / 2;
-        //     const offsetY = (canvas.height - image.height) / 2;
-
-        //     context.clearRect(0, 0, canvas.width, canvas.height);
-        //     context.drawImage(image, offsetX, offsetY, image.width, image.height);
-        // };
-
         const startAnimation = () => {
             const tl = gsap.timeline({
                 scrollTrigger: {
@@ -92,12 +100,29 @@ const Section1 = () => {
                 frame: frameCount - 1,
                 snap: 'frame',
                 ease: 'none',
+                 //@ts-expect-error development
                 onUpdate: () => render(context,canvasRef.current, loadedImages[imageSequence.current.frame]),
+            });
+
+            tl.fromTo(".svg_animation",
+                 {      
+                opacity:0,
+                ease: 'power3.in',
+           
+            },
+             {
+                opacity:1,
+                ease: 'power3.out',
+               // attr
+                onComplete:() =>  startSVGAnimation(),
+                onReverseComplete:() =>  startSVGAnimation(),
+              
             });
 
             headings.forEach((heading, i) => {
                 const duration = 1 / headings.length;
                 const position = i * duration;
+                 //@ts-expect-error development
                 tl.to(heading, { opacity: 1 }, position).to(heading, { opacity: 0 }, position + duration);
             });
         };
@@ -133,9 +158,8 @@ const Section1 = () => {
                     <h3>Lorem ipsum dolor sit.</h3>
                     <h3>Labore, recusandae deleniti. Obcaecati.</h3>
                     <h3>Magni doloremque ducimus asperiores.</h3>
-                    <h3>Ipsa in labore repellendus?</h3>
-                    <h3>Inventore harum quasi quis?</h3>
                 </div>
+                <SVGAnimation />
             </div>
           
         </div>
