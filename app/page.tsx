@@ -7,11 +7,16 @@ import { ScrollSmoother } from 'gsap/ScrollSmoother'; // Importa el plugin
 import Section1 from "./components/Section1/Section1";
 import Section2 from "./components/Section2/Section2";
 import Section2B from './components/Section2B/Section2B';
-
+import Navbar from './components/shared_components/Navbar/Navbar';
+import NavbarMobile from './components/shared_components/NavbarMobile/NavbarMobile';
+import { useViewportSize } from '@mantine/hooks';
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
 export default function Home() {
+    const viewportSize = useViewportSize();
+    const isMobile = viewportSize.width < 768;
+
     const smoother = useRef(null);
     const mainRef = useRef(null);
 
@@ -40,6 +45,9 @@ export default function Home() {
     return (
         <div id="smooth-wrapper">
             <div id="smooth-content" ref={mainRef}>
+              
+                 {isMobile?<NavbarMobile/>:  <Navbar/>}
+                
                 <Section1 />
                 <Section2 />
                 <Section2B/>

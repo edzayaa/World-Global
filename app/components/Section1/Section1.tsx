@@ -82,7 +82,6 @@ const Section1 = () => {
 
         const canvas = canvasRef.current;
         const context = canvas.getContext('2d');
-        //const headings = gsap.utils.toArray('.text-container h3');
 
         if (!context) return;
 
@@ -91,20 +90,38 @@ const Section1 = () => {
             .to(loaderRef.current,{
               opacity:0,
                ease: 'power1.out',
+              
             })
             .to(loaderRef.current,{
                zIndex:0,
                ease: 'none',
+               
             }).fromTo(".scope_section1 .text-container",
                 {
                     opacity:0,
-                    y:"-20%"
+                    y:"-20%",
+                    
                 },
                 {
                     opacity:1,
                     y:0,
-                    ease:"power4.in"
+                    ease:"power4.in",
+                     duration:1
                 }
+
+            ).fromTo(".scope_section1 .scroll_down",
+                {
+                    opacity:0,
+                    y:"20%",
+                    
+                },
+                {
+                    opacity:1,
+                    y:0,
+                    ease:"power4.in",
+                    duration:1
+                },
+                "<"
 
             ).fromTo(homeCardRef.current,
                 {
@@ -114,70 +131,84 @@ const Section1 = () => {
                 {
                     opacity:1,
                     x:0,
-                    ease:"power4.in"
+                    ease:"power4.in",
+                     duration:1
                 },
                 "<"
             )
         } 
 
-        const startAnimation = () => {
-            const tl = gsap.timeline({
-                scrollTrigger: {
-                    id:'image-sequence',
-                    trigger: '.scroll-container',
-                    scrub: 0.5,
-                    start: 'top top',
-                    end: '+=2000', 
-                    
-                    pin: true,
-                    markers: false,
-                    
-                }
-            });
+const startAnimation = () => {
+    // Timeline principal para la secuencia de imágenes y la entrada del SVG
+    const tl = gsap.timeline({
+        scrollTrigger: {
+            id: 'image-sequence',
+            trigger: '.scroll-container',
+            scrub: 0.5,
+            start: 'top top',
+            end: '+=1000',
+            pin: true,
+            markers: false,
+        }
+    });
 
-            tl.to(imageSequence.current, {
-                frame: frameCount - 1,
-                snap: 'frame',
-                ease: 'none',
-                 //@ts-expect-error development
-                onUpdate: () => render(context,canvasRef.current, loadedImages[imageSequence.current.frame]),
-            });
+    // 1. Animación de la secuencia de imágenes.
+    tl.to(imageSequence.current, {
+        frame: frameCount - 1,
+        snap: 'frame',
+        ease: 'none',
+        //@ts-expect-error dddd
+        onUpdate: () => render(context, canvasRef.current, loadedImages[imageSequence.current.frame]),
+    });
 
-            tl.fromTo(".svg_animation",
-                 {      
-                opacity:0,
-                ease: 'power3.in',
-           
-            },
-             {
-                opacity:1,
-                ease: 'power3.out',
-               // attr
-                onComplete:() =>  startSVGAnimation(),
-                onReverseComplete:() =>  startSVGAnimation(),
-                
-              
-            },">")/*.to(".scope_section1 .text-container",
-                {
-                    opacity:0,
-                    x:"-20%",
-                }, "<"
+    // 2. Animación del SVG, que empieza justo después de la secuencia de imágenes.
+    tl.fromTo(".svg_animation",
+        {
+            opacity: 0,
+        },
+        {
+            opacity: 1,
+            ease: 'power3.out',
+            onStart: () => startSVGAnimation(),
+            onReverseComplete: () => startSVGAnimation(),
+        },
+        ">"
+    );
 
-            ).to(homeCardRef.current,
-                {
-                    opacity:0,
-                    x:"20%"
-                },
-                "<"
-            )*/
+    // 3. NUEVO: Animación de salida de los textos y la tarjeta.
+    // Usamos el mismo scrollTrigger, pero con un punto de inicio específico.
+    // Queremos que esto comience antes de que el timeline principal termine.
+    gsap.timeline({
+        scrollTrigger: {
+            trigger: '.scroll-container',
+            scrub: 0.5,
+            start: 'top top',
+            end: '+=100', // Mismo "end" que el timeline principal
+       
+        }
+    })
+    .to(".scope_section1 .text-container", {
+        opacity: 0, // Animación de salida, no de entrada
+        y: "-20%", // Cambiamos la dirección para un efecto de salida fluido
+        ease: "power2.out", // Un ease más suave para la salida
+        duration:4
+    }, "<0.5") // Inicia al 60% del progreso total del scrollTrigger
 
-            // headings.forEach((heading, i) => {
-            //     const duration = 1 / headings.length;
-            //     const position = i * duration;
-            //      //@ts-expect-error development
-            //     tl.to(heading, { opacity: 1 }, position).to(heading, { opacity: 0 }, position + duration);
-            // });
-        };
+    .to(homeCardRef.current, {
+        opacity: 0, // Animación de salida
+        x: "20%",
+        ease: "power2.out",
+        duration:4
+    }, "<")
+
+    .to(".scope_section1 .scroll_down", {
+        opacity: 0, // Animación de salida
+        y: "20%",
+        ease: "power2.out",
+        duration:4
+    }, "<");
+    
+};
 
         // El chequeo ahora es contra el frameCount completo, no frameCount - 1.
         if (loadedImages.length === frameCount) {
@@ -207,6 +238,7 @@ const Section1 = () => {
         <>
         <div ref={loaderRef} className="loader">
             <p>cargando..</p>
+            <progress value={75} max={100} />
         </div>
         <div className='scope_section1' ref={scopeRef} >
             <div className="scroll-container">
@@ -227,6 +259,11 @@ const Section1 = () => {
                         Get a free quote today 
                     </Bottom>
 
+                </div>
+                <div className="scroll_down">
+                    <Text color='white' fontWeight='medium'>
+                        SCROLL DOWN
+                    </Text>
                 </div>
                 <SVGAnimation />
             </div>

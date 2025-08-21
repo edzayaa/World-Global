@@ -1,9 +1,9 @@
 
 svg.svg_animation {
     position: absolute;
-    left: 16%;
+    left: 14%;
     top: 37%;
-    scale: 1;
+    scale: 0.85;
 }
 
 @media only screen and (min-width: 1200px) and (max-width: 1600px) {

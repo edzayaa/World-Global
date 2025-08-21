@@ -1,0 +1,96 @@
+.navbar {
+    position: fixed;
+    top: 35px;
+    background-color: var(--black-opacity);
+    z-index: 1;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    left: 60px;
+    width: 100%;
+    max-width: 726px;
+    height: 95px;
+    border-radius: 16px;
+}
+
+.navbar .link{
+    color: var(--white);
+    padding-inline: 15px;
+    font-size: 18px;
+    font-weight: 500;
+}
+
+
+
+        /* Estilos del contenedor principal */
+.wrapper {
+
+    
+        position: relative;
+    height: inherit;
+    display: flex
+;
+    align-items: center;
+}
+
+        /* Clase para el estado colapsado */
+     
+
+.content {
+    /* ... otros estilos */
+    max-height: 0;
+    overflow: hidden; /* Esto oculta el contenido que se desborda cuando la altura es 0 */
+    transition: max-height  0.6s ease-in-out;
+    position: absolute;
+    top: 105%;
+}
+
+.content.open {
+    max-height: 500px; /* Un valor lo suficientemente grande para contener el contenido */
+    opacity: 1; /* Transicionamos la opacidad para un efecto más suave */
+}
+
+.dropdown-container {
+    position: relative;
+}
+
+.dropdown-menu {
+   
+    border-radius: 8px;
+       width: 100%;
+    display: flex;
+    flex-direction: column;
+   background-color:var(--black-opacity);
+    font-family: inherit;
+}
+
+.dropdown-menu a {
+    color: var(--white);
+    text-decoration: none;
+    padding: 5px;
+    transition: background-color 0.3s ease;
+    text-decoration: none;
+     font-family: inherit;
+     font-weight: 500;
+}
+
+.dropdown-menu a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+.toggleBtn{
+    background: none;
+    outline: none;
+    border: unset;
+    font-size: 17px;
+    padding-top: 3px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: inherit;
+}
+
+.toggleBtn svg{
+  margin-left: 10px;
+}

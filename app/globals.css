@@ -2,7 +2,7 @@
   --background: #ffffff;
   --foreground: #171717;
   --black:#121212;
-  --black-opacity:#121212b0;
+  --black-opacity:#1212126c;
   --yellow:#AB8E4C;
   --yellow-opacity:#ab8f4c9f;
   --white:#FCF6EC;
@@ -16,9 +16,9 @@ body {
   max-width: 100vw;
   overflow-x: hidden;
   background-color: var(--white);
-    /* &::-webkit-scrollbar {
+  &::-webkit-scrollbar {
     background-color: #aaaaaa00; 
-    }
+    }/*
     &::-webkit-scrollbar-thumb {
      background: var(--yellow);
      width: 1px;
@@ -54,5 +54,10 @@ a {
 }
 
 .blur_bg{
-  backdrop-filter: blur(20px);
+    background-color: var(--black-opacity);
+    background:
+    linear-gradient(to right, var(--black-opacity), var(--black-opacity)),
+    url("https://grainy-gradients.vercel.app/noise.svg");
+    backdrop-filter: blur(25px);
+    background-blend-mode: color-burn;
 }
