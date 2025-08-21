@@ -4,7 +4,6 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from "@gsap/react";
 import "./styles.css";
-import SVGAnimation from '../Section1/SVGAnimation';
 
 gsap.registerPlugin(ScrollTrigger);
 

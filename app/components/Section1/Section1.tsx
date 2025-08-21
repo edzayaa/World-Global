@@ -6,6 +6,8 @@ import './styles.css';
 import { useGSAP } from "@gsap/react";
 import { useDebouncedValue, useDidUpdate, useViewportSize } from '@mantine/hooks';
 import SVGAnimation, { SVGAnimationHandle } from './SVGAnimation';
+import Text from '../shared_components/Text/Text';
+import Bottom from '../shared_components/Bottom/Bottom';
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
@@ -20,6 +22,8 @@ const Section1 = () => {
     const canvasRef = useRef<HTMLCanvasElement>(null);
     const scopeRef = useRef<HTMLDivElement>(null);
     const imageSequence = useRef({ frame: 0 });
+    const loaderRef = useRef<HTMLDivElement>(null)
+    const homeCardRef = useRef<HTMLDivElement>(null)
 
     //const svgRef = useRef<SVGAnimationHandle>(null);
 
@@ -78,9 +82,43 @@ const Section1 = () => {
 
         const canvas = canvasRef.current;
         const context = canvas.getContext('2d');
-        const headings = gsap.utils.toArray('.text-container h3');
+        //const headings = gsap.utils.toArray('.text-container h3');
 
         if (!context) return;
+
+        const initialAnimation = () => {
+            gsap.timeline()
+            .to(loaderRef.current,{
+              opacity:0,
+               ease: 'power1.out',
+            })
+            .to(loaderRef.current,{
+               zIndex:0,
+               ease: 'none',
+            }).fromTo(".scope_section1 .text-container",
+                {
+                    opacity:0,
+                    y:"-20%"
+                },
+                {
+                    opacity:1,
+                    y:0,
+                    ease:"power4.in"
+                }
+
+            ).fromTo(homeCardRef.current,
+                {
+                    opacity:0,
+                    x:"20%"
+                },
+                {
+                    opacity:1,
+                    x:0,
+                    ease:"power4.in"
+                },
+                "<"
+            )
+        } 
 
         const startAnimation = () => {
             const tl = gsap.timeline({
@@ -89,7 +127,8 @@ const Section1 = () => {
                     trigger: '.scroll-container',
                     scrub: 0.5,
                     start: 'top top',
-                    end: '+=1000', 
+                    end: '+=2000', 
+                    
                     pin: true,
                     markers: false,
                     
@@ -116,20 +155,34 @@ const Section1 = () => {
                // attr
                 onComplete:() =>  startSVGAnimation(),
                 onReverseComplete:() =>  startSVGAnimation(),
+                
               
-            });
+            },">")/*.to(".scope_section1 .text-container",
+                {
+                    opacity:0,
+                    x:"-20%",
+                }, "<"
 
-            headings.forEach((heading, i) => {
-                const duration = 1 / headings.length;
-                const position = i * duration;
-                 //@ts-expect-error development
-                tl.to(heading, { opacity: 1 }, position).to(heading, { opacity: 0 }, position + duration);
-            });
+            ).to(homeCardRef.current,
+                {
+                    opacity:0,
+                    x:"20%"
+                },
+                "<"
+            )*/
+
+            // headings.forEach((heading, i) => {
+            //     const duration = 1 / headings.length;
+            //     const position = i * duration;
+            //      //@ts-expect-error development
+            //     tl.to(heading, { opacity: 1 }, position).to(heading, { opacity: 0 }, position + duration);
+            // });
         };
 
         // El chequeo ahora es contra el frameCount completo, no frameCount - 1.
         if (loadedImages.length === frameCount) {
             startAnimation();
+            initialAnimation();
         }
     }, { dependencies: [loadedImages], scope: scopeRef });
 
@@ -151,18 +204,36 @@ const Section1 = () => {
 		handleViewportResize()
 	}, [debouncedViewportSize])
     return (
+        <>
+        <div ref={loaderRef} className="loader">
+            <p>cargando..</p>
+        </div>
         <div className='scope_section1' ref={scopeRef} >
             <div className="scroll-container">
                 <canvas ref={canvasRef} className="canvas_image_sequence" />
                 <div className="text-container">
-                    <h3>Lorem ipsum dolor sit.</h3>
-                    <h3>Labore, recusandae deleniti. Obcaecati.</h3>
-                    <h3>Magni doloremque ducimus asperiores.</h3>
+                    <Text variant='h2' fontSize='XL' color='white'>
+                       Global Leader in<br/> Synthetic Roofing
+                    </Text>
+                </div>
+                <div ref={homeCardRef} className="homepage_card blur_bg">
+                    <Text fontWeight='medium'  fontSize='XS' color='white' style={{marginBottom:"1rem"}} >
+                       EcoThatch Excellence
+                    </Text>
+                    <Text color='white'>
+                        A global leader in premium synthetic thatch roofing and artificial bamboo, delivering durable, authentic, and innovative solutions for exceptional architectural designs.
+                    </Text>
+                    <Bottom style={{marginTop:"15px"}} bgArrowColor='white' arrowColor='black'>
+                        Get a free quote today 
+                    </Bottom>
+
                 </div>
                 <SVGAnimation />
             </div>
           
         </div>
+        </>
+
     );
 };
 

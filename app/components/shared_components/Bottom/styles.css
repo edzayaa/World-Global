@@ -1,0 +1,70 @@
+.Bottom{
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 500px;
+    border-radius: 16px;
+    border: 1px solid #F8F7F361;
+    padding: 15px;
+    transition: ease-in-out 0.2s;
+    cursor: pointer;
+    padding-left: 30px;
+}
+
+.Bottom:hover{
+  filter: brightness(0.8);
+  border-color: rgba(19, 19, 19, 0);
+}
+
+.Bottom.black{
+	background-color: var(--background);
+}
+
+.Bottom.yellow{
+	background-color: var(--yellow);
+}
+
+.Bottom.black-opaque{
+	background-color: var(--gray-opacity);
+}
+
+.Bottom.yellow-opaque{
+	background-color: var(--yellow-opacity);
+}
+
+.Bottom.blur{
+ backdrop-filter: blur(25px);
+}
+
+.Arrow{
+    border-radius: 50%;
+    aspect-ratio: 1;
+    width:40px ;
+    margin-left: 10px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.Arrow.yellow{
+   background-color: var(--yellow);
+}
+
+.Arrow.white{
+   background-color: var(--white);
+}
+.Arrow.black{
+   background-color: var(--black);
+}
+
+.Arrow.arrow-yellow path{
+   fill: var(--yellow);
+}
+
+.Arrow.arrow-white path{
+   fill: var(--white);
+}
+.Arrow.arrow-black path{
+   fill: var(--black);
+}

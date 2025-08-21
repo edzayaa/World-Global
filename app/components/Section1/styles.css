@@ -8,28 +8,42 @@
 }
 
 .scroll-container {
-    background-color: red;
+    background-color: var(--white);
     width: 100vw;
-    height: 100vh;
+    height: 100dvh;
+    /* padding: 10px; */
     position: sticky;
     top: 0;
     display: flex;
     justify-content: center;
     align-items: center;
+  
+    padding: 10px;
 }
 
 canvas {
-    width: 100%;
-    height: auto;
-    
+    width: calc(100% - 15px) ;
+    height: calc(100% - 15px) ;
+    filter: brightness(0.7);
+    border-radius: 40px;
+}
+@media only screen and (min-width: 768px) and (max-width: 1600px) {
+    canvas {
+        width: calc(100% - 10px) ;
+        height: calc(100% - 10px) ;
+    }
+}
+@media only screen and (max-width: 767px) {
+    canvas {
+        width: calc(100% - 5px) ;
+        height: calc(100% - 5px) ;
+    }
 }
 
 .text-container {
     position: absolute;
-    top: 50%;
-    left: 0;
-    width: 100%;
-    transform: translateY(-50%);
+    top:130px;
+    left: 4%;
 }
 
 .text-container h3 {
@@ -43,3 +57,36 @@ canvas {
     color: white;
     opacity: 0; /* GSAP controlará la opacidad de todos los elementos */
 }
+
+.loader{
+    background-color: var(--white);
+    opacity: 1;
+    justify-content: center;
+    align-items: center;
+    height: 100dvh;
+    width: 100vw;
+    display: flex;
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 4;
+}
+
+.homepage_card{
+    /* background-image: url("/tv_broken.webp"); */
+    background-color: var(--black-opacity);
+    
+    border-radius: 16px;
+    padding: 32px  ;
+    max-width: 507px;
+    position: absolute;
+    right: 30px;
+    bottom: 40px;
+}
+
+@media only screen and (max-width: 767px) {
+.homepage_card{
+    max-width: 100%;
+    right: 20px;
+    bottom: 30px;
+}}
