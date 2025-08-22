@@ -31,7 +31,6 @@ const Section1 = () => {
         // Llama a la función expuesta por useImperativeHandle
         if (scopeRef.current) {
             const svgRef = scopeRef.current.querySelector(".svg_animation")
-            console.log(svgRef)
             if (svgRef?.classList.contains("active")) {
                 svgRef?.setAttribute("class","svg_animation")
             }else{
