@@ -37,6 +37,7 @@ canvas {
     canvas {
         width: calc(100% - 5px) ;
         height: calc(100% - 5px) ;
+        border-radius: 15px;
     }
 }
 
@@ -86,9 +87,10 @@ canvas {
 
 @media only screen and (max-width: 767px) {
 .homepage_card{
-    max-width: 100%;
+    max-width: 90%;
     right: 20px;
     bottom: 30px;
+    padding: 20px  ;
 }}
 
 .scroll_down{
@@ -115,5 +117,14 @@ canvas {
 @media only screen and (max-width: 767px) {
     .scroll_down{
         display: none;
+    }
+}
+@media only screen and (max-width: 767px) {
+    .text-container{
+        left: 15%;
+    }
+    .text_image_seq{
+        text-align: center;
+        width: 80%;
     }
 }

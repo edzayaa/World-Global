@@ -1,101 +1,108 @@
-import {
-  Navbar,
-  NavbarBrand,
-  NavbarContent,
-  NavbarItem,
-  NavbarMenuToggle,
-  NavbarMenu,
-  NavbarMenuItem,
-  Link,
-  Button,
-} from "@heroui/navbar";
 
-export const AcmeLogo = () => {
-  return (
-    <svg width="25" height="20" viewBox="0 0 25 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0 1.62561H25" stroke="white" stroke-width="1.5"/>
-      <path d="M4.46484 10L25.0006 10" stroke="white" stroke-width="1.5"/>
-      <path d="M0 18.3744H25" stroke="white" stroke-width="1.5"/>
-    </svg>
 
-  );
-};
+import { useRef } from "react";
+import gsap from "gsap"; // Importa GSAP
+import { useGSAP } from "@gsap/react";
+import "./styles.css"
+import Image from "next/image";
+import {  usePathname } from "next/navigation";
+import Link from "next/link";
+
+gsap.registerPlugin(useGSAP);
+
 
 export default function NavbarMobile() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  const menuItems = [
-    "Profile",
-    "Dashboard",
-    "Activity",
-    "Analytics",
-    "System",
-    "Deployments",
-    "My Settings",
-    "Team Settings",
-    "Help & Feedback",
-    "Log Out",
-  ];
+  const pathName = usePathname()
+
+  const menuRef = useRef(null); // Referencia al contenedor del menú
+
+  const container = useRef();
+  // store the timeline in a ref.
+  const tl = useRef();
+      
+  const { contextSafe } = useGSAP(() => {
+    
+    tl.current = gsap.timeline({ paused: true }) // Mantenemos esta configuración
+      .fromTo(container.current, {
+        height: "60px"
+      }, {
+        height: "85vh",
+      });
+  }, { scope: container });
+  
+  
+  const toggleTimeline = contextSafe(() => {
+   
+  if (tl.current.progress() === 0) {
+      tl.current.play();
+    } else {
+      tl.current.reverse();
+    }
+    
+  });
+
+
 
   return (
+   <nav ref={container} className="navbar-mobile blur_bg">
+            <div className="alwayws_visible">
+                <Image src={"/images/navbar_logo.png"} width={57} height={57} alt="logo" />
 
-    <Navbar  onMenuOpenChange={setIsMenuOpen}>
-      <AcmeLogo />
-        <NavbarMenuToggle
-          aria-label={isMenuOpen ? "Close menu" : "Open menu"}
-          className="sm:hidden"
-        ></NavbarMenuToggle>
-      {/* <NavbarContent>
+                <button className="toggle-btn" onClick={toggleTimeline}>
+                    <svg width="25" height="20" viewBox="0 0 25 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0 1.62561H25" stroke="white" strokeWidth="1.5"/>
+                        <path d="M4.46484 10L25.0006 10" stroke="white" strokeWidth="1.5"/>
+                        <path d="M0 18.3744H25" stroke="white" strokeWidth="1.5"/>
+                    </svg>
+                </button>
+            </div>
 
-        <NavbarBrand>
-          
-          <p className="font-bold text-inherit">ACME</p>
-        </NavbarBrand>
-      </NavbarContent>
+            <div ref={menuRef} className="menu-container">
+                <ul className="menu-list">
+                    {menuItems.map(({label, url}, index) => {
+                        // Compara la URL del item con el pathname actual
+                        const isActive = url === pathName;
+                        console.log(pathName, url, isActive)
+                        // Asigna la clase 'active' si isActive es true
+                        const className = `menu-item ${isActive ? "active" : ""}`;
+                        return (
+                            <li key={index} className={className}>
+                                <Link href={url}>{label}</Link>
+                            </li>
+                        )}
+                    )}
+                </ul>
 
-      <NavbarContent className="hidden sm:flex gap-4" justify="center">
-        <NavbarItem>
-          <Link color="foreground" href="#">
-            Features
-          </Link>
-        </NavbarItem>
-        <NavbarItem isActive>
-          <Link aria-current="page" href="#">
-            Customers
-          </Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Link color="foreground" href="#">
-            Integrations
-          </Link>
-        </NavbarItem>
-      </NavbarContent>
-      <NavbarContent justify="end">
-        <NavbarItem className="hidden lg:flex">
-          <Link href="#">Login</Link>
-        </NavbarItem>
-        <NavbarItem>
-          <Button as={Link} color="primary" href="#" variant="flat">
-            Sign Up
-          </Button>
-        </NavbarItem>
-      </NavbarContent> */}
-      <NavbarMenu>
-        {menuItems.map((item, index) => (
-          <NavbarMenuItem key={`${item}-${index}`}>
-            <Link
-              className="w-full"
-              color={
-                index === 2 ? "primary" : index === menuItems.length - 1 ? "danger" : "foreground"
-              }
-              href="#"
-              size="lg"
-            >
-              {item}
-            </Link>
-          </NavbarMenuItem>
-        ))}
-      </NavbarMenu>
-    </Navbar>
+                <ul className="menu-list-extra">
+                    {menuExtraItems.map(({label, url}, index) => {
+                        // Compara la URL del item con el pathname actual
+                        const isActive = url === pathName;
+                        // Asigna la clase 'active' si isActive es true
+                        const className = `menu-item ${isActive ? "active" : ""}`;
+                        return (
+                            <li key={index} className={className}>
+                                <Link href={url}>{label}</Link>
+                            </li>
+                        )}
+                    )}
+                </ul>
+            </div>
+
+        </nav>
   );
 }
+
+  const menuItems = [
+    {label:"Home", url:"/"},
+    {label:"Product Palm", url:"/products/product-palm"},
+    {label:"Synthetic Bamboo", url:"/products/synthetic-bamboo"},
+    {label:"About Us", url:"/about-us"},
+    {label:"Technology", url:"/technology"},
+    {label:"Contact Us", url:"/contact-us"},
+   ];
+
+  const menuExtraItems = [
+    {label:"Privacy Policy", url:"/privacy-policy"},
+    {label:"Terms & Conditions", url:"/terms-&-tonditions"},
+   ];

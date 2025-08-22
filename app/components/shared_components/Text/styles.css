@@ -1,7 +1,7 @@
 .text{
 	color: var(--black);
-	font-size: 17px;
 	font-weight: 700; 
+	font-family: inherit;
 }
 
 h1,h2,h3,h4,h5,h6.text{
@@ -73,7 +73,7 @@ h1,h2,h3,h4,h5,h6.text{
 
 @media only screen and (min-width: 1200px) and (max-width: 1600px) {
 	.text.xss{
-	font-size: 16px;
+	font-size: 16px !important;
 	}
 
 	.text.xs{
@@ -98,5 +98,35 @@ h1,h2,h3,h4,h5,h6.text{
 
 	.text.xxl {
 		font-size: 100px;
+	}
+}
+
+@media only screen and (max-width: 768px) {
+	.xss{
+	font-size: 14px  !important;
+	}
+
+	.text.xs{
+	font-size: 20px;
+	}
+
+	.text.s{
+	font-size: 22px;
+	}
+
+	.text.m{
+	font-size: 25px;
+	}
+
+	.text.l {
+		font-size: 30px;
+	}
+
+	.text.xl {
+		font-size: 40px;
+	}
+
+	.text.xxl {
+		font-size: 50px;
 	}
 }

@@ -22,6 +22,8 @@ export default function Home() {
 
     useEffect(() => {
       window.scrollTo(0, 0); // Scrolls to the top-left corner
+
+        if (isMobile) return;
         // Asegúrate de que los elementos existen antes de inicializar
         if (mainRef.current) {
             // Crea una instancia de ScrollSmoother
@@ -43,15 +45,19 @@ export default function Home() {
     }, []);
 
     return (
+        <>
+        {isMobile?<NavbarMobile/>:  <Navbar/>}
         <div id="smooth-wrapper">
             <div id="smooth-content" ref={mainRef}>
               
-                 {isMobile?<NavbarMobile/>:  <Navbar/>}
+                 
                 
                 <Section1 />
                 <Section2 />
                 <Section2B/>
             </div>
         </div>
+        </>
+
     );
 }

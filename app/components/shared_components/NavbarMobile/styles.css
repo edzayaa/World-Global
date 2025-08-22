@@ -1,0 +1,72 @@
+.navbar-mobile {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  height: 60px;
+  border-radius: 8px;
+  transition: all 0.3s ease-in;
+  overflow: hidden;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+}
+
+.alwayws_visible{
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   height: 60px;
+   padding-inline: 15px;
+}
+
+
+
+.toggle-btn {
+
+  border: none;
+  cursor: pointer;
+  background-color: unset;
+  border: 0.64px solid #F8F7F361;
+  padding: 10px;
+  border-radius: 5px;
+
+}
+
+.menu-list-extra,.menu-list {
+  list-style: none;
+}
+
+.menu-container{
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+}
+
+.menu-item{
+    margin-bottom: 1em;
+}
+.menu-item a {
+  color: #FFFFFF5C;
+  text-decoration: none;
+  font-size: 40px;
+  white-space: pre;
+}
+
+@media only screen and (max-width: 380px) {
+ .menu-item a {
+  font-size: 35px;
+}
+}
+
+.menu-item.active a{
+    color: #fff;
+}
+
+.menu-list-extra .menu-item a{
+ color: #fff;
+ font-size: 25px;
+}

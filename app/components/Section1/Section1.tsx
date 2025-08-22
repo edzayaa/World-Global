@@ -244,8 +244,8 @@ const startAnimation = () => {
             <div className="scroll-container">
                 <canvas ref={canvasRef} className="canvas_image_sequence" />
                 <div className="text-container">
-                    <Text variant='h2' fontSize='XL' color='white'>
-                       Global Leader in<br/> Synthetic Roofing
+                    <Text  variant='h2' fontSize='XL' color='white' extraClass='text_image_seq'>
+                       Global Leader in {!isMobile?<br/>:null } Synthetic Roofing
                     </Text>
                 </div>
                 <div ref={homeCardRef} className="homepage_card blur_bg">

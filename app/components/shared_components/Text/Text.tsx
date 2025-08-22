@@ -12,6 +12,7 @@ interface Props
   fontSize?: TextSize;
   fontWeight?: TFontWeight;
   variant?: Variant;
+  extraClass?:string
 }
 
 const Text: FC<PropsWithChildren<Props>> = ({
@@ -20,10 +21,11 @@ const Text: FC<PropsWithChildren<Props>> = ({
   fontSize = 'XXS', // Valor por defecto
   fontWeight = 'regular', // Valor por defecto
   variant = 'p', // Valor por defecto
+  extraClass,
   ...props
 }) => {
   const Tag = variant;
-  const classes = `text ${color} ${fontSize.toLowerCase()} ${fontWeight}`;
+  const classes = `text ${color} ${fontSize.toLowerCase()} ${fontWeight} ${extraClass ?? ""}`;
 
   return (
     <Tag className={classes}  {...props}>

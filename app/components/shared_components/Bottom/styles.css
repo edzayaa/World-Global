@@ -10,6 +10,15 @@
     transition: ease-in-out 0.2s;
     cursor: pointer;
     padding-left: 30px;
+   font-family: "aeonik";
+}
+
+@media only screen and (max-width: 768px) {
+ .Bottom{
+   height: 41px;
+    padding: 10px;
+    border-radius: 10px;
+  }
 }
 
 .Bottom:hover{
@@ -33,9 +42,6 @@
 	background-color: var(--yellow-opacity);
 }
 
-.Bottom.blur{
- backdrop-filter: blur(5px);
-}
 
 .Arrow{
     border-radius: 50%;
@@ -45,6 +51,22 @@
     justify-content: center;
     align-items: center;
     display: flex;
+}
+
+ .Arrow svg{
+      width:17px ;
+   aspect-ratio: 1;
+ }
+
+@media only screen and (max-width: 768px) {
+ .Arrow{
+    width:27px ;
+    margin-left: 8px;
+  }
+
+  .Arrow svg{
+   width:10px ;
+  }
 }
 
 .Arrow.yellow{

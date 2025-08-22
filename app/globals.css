@@ -7,7 +7,7 @@
   --yellow-opacity:#ab8f4c9f;
   --white:#FCF6EC;
   --gray:#ADADAD;
-  --gray-opacity:rgb(248 247 243 / 22%);
+  --gray-opacity:rgba(131, 131, 131, 0.22);
 }
 
 
@@ -16,6 +16,7 @@ body {
   max-width: 100vw;
   overflow-x: hidden;
   background-color: var(--white);
+  font-family: "aeonik";
   &::-webkit-scrollbar {
     background-color: #aaaaaa00; 
     }/*
