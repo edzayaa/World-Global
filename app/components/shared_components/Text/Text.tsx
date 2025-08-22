@@ -17,7 +17,7 @@ interface Props
 
 const Text: FC<PropsWithChildren<Props>> = ({
   children,
-  color = 'black', // Valor por defecto
+  color = '', // Valor por defecto
   fontSize = 'XXS', // Valor por defecto
   fontWeight = 'regular', // Valor por defecto
   variant = 'p', // Valor por defecto

@@ -6,12 +6,21 @@ svg.svg_animation {
     scale: 0.85;
 }
 
+
+
 @media only screen and (min-width: 1200px) and (max-width: 1600px) {
     svg.svg_animation {
         scale: 0.7;
           left: 3%;
     }
 }
+
+@media only screen and (max-width: 768px) {
+  svg.svg_animation {
+    display: none;
+}
+}
+
 svg .svg-elem-1 {
   stroke-dashoffset: 996.630859375px;
   stroke-dasharray: 996.630859375px;

@@ -1,6 +1,5 @@
 .text{
 	color: var(--black);
-	font-weight: 700; 
 	font-family: inherit;
 }
 
@@ -17,6 +16,10 @@ h1,h2,h3,h4,h5,h6.text{
 
 .text.yellow{
 	color: var(--yellow);
+}
+
+.text.gray{
+	color: var(--gray);
 }
 
 .text.regular{
@@ -119,14 +122,14 @@ h1,h2,h3,h4,h5,h6.text{
 	}
 
 	.text.l {
-		font-size: 30px;
-	}
-
-	.text.xl {
 		font-size: 40px;
 	}
 
-	.text.xxl {
+	.text.xl {
 		font-size: 50px;
+	}
+
+	.text.xxl {
+		font-size: 60px;
 	}
 }

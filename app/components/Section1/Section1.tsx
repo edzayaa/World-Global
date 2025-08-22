@@ -5,7 +5,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import './styles.css';
 import { useGSAP } from "@gsap/react";
 import { useDebouncedValue, useDidUpdate, useViewportSize } from '@mantine/hooks';
-import SVGAnimation, { SVGAnimationHandle } from './SVGAnimation';
+import SVGAnimation from './SVGAnimation';
 import Text from '../shared_components/Text/Text';
 import Bottom from '../shared_components/Bottom/Bottom';
 
@@ -93,7 +93,7 @@ const Section1 = () => {
               
             })
             .to(loaderRef.current,{
-               zIndex:0,
+               zIndex:-1,
                ease: 'none',
                
             }).fromTo(".scope_section1 .text-container",
