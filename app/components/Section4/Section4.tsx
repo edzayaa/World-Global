@@ -1,112 +1,58 @@
-// "use client"
-// import { useRef } from 'react';
-// import { gsap } from 'gsap';
-// import { ScrollTrigger } from 'gsap/ScrollTrigger';
-// import './styles.css';
-// import { useGSAP } from "@gsap/react";
+"use client"
+import { useRef } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from "@gsap/react";
+import "./styles.css";
+import { getPrevSection, getVerticalOffset } from '@/app/utils';
 
-// gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger);
 
-// // Define el número total de imágenes en tu secuencia
-// const frameCount = 120; 
 
-// // Genera un array con todas las URL de las imágenes de Apple
-// const urls = new Array(frameCount)
-//     .fill()
-//     .map(
-//         (o, i) =>
-//             `https://www.apple.com/105/media/us/airpods-pro/2019/1299e2f5_9206_4470_b28e_08307a42f19b/anim/sequence/large/01-hero-lightpass/${(
-//                 i + 1
-//             )
-//                 .toString()
-//                 .padStart(4, '0')}.jpg`
-//     );
+const Section4 = () => {
+    const containerRef = useRef(null);
+    const first = useRef(null);
+    const second = useRef(null);
 
-// const Section4 = () => {
-//     const canvasRef = useRef(null);
-//     const scopeRef = useRef(null);
-//     const imageSequence = useRef({ frame: 0 });
-//     const images = useRef([]);
+    useGSAP(() => {
+        // Obtenemos una referencia al elemento que será nuestro 'pin' en la sección 1
+        // para que la segunda animación empiece después de que el 'pin' de la primera termine.
+        const prevSection = getPrevSection(undefined, containerRef.current);
 
-//     useGSAP(() => {
-//         const canvas = canvasRef.current;
-//         const context = canvas.getContext('2d');
-//         const headings = gsap.utils.toArray('.text-container_4 h3');
+        if (!prevSection) return;
 
-//         // Carga todas las imágenes desde las URL
-//         let imagesLoaded = 0;
-//         for (let i = 0; i < frameCount; i++) {
-//             const img = new Image();
-//             img.onload = () => {
-//                 imagesLoaded++;
-//                 if (imagesLoaded === frameCount) {
-//                     startAnimation();
-//                 }
-//             };
-//             img.src = urls[i];
-//             images.current.push(img);
-//         }
+        const prevSectionOffset = getVerticalOffset(prevSection) + prevSection.scrollHeight;
+        const scrollDistance = 500; 
 
-//         const startAnimation = () => {
-//             // Ajusta las dimensiones del canvas
-//             canvas.width = images.current[0].width;
-//             canvas.height = images.current[0].height;
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: containerRef.current,
+                start: prevSectionOffset + scrollDistance,
+                end: `+=${scrollDistance}`,
+                scrub: 1,
+                //pin: true,
+            }
+        });
 
-//             const tl = gsap.timeline({
-//                 scrollTrigger: {
-//                     trigger: '.scroll-container_4',
-//                     scrub: 0.5,
-//                     start: 'top top',
-//                     end: 'bottom top',
-//                     pin: true,
-//                     markers: false // Puedes dejarlos para depurar, pero es mejor desactivarlos
-//                 }
-//             });
+        tl.from(first.current, {
+            y: -100, 
+            opacity: 0, 
+            duration: 1
+        });
 
-//             // Animación de la secuencia de imágenes
-//             tl.to(imageSequence.current, {
-//                 frame: frameCount - 1,
-//                 snap: 'frame',
-//                 ease: 'none',
-//                 onUpdate: render,
-//             });
+        tl.from(second.current, {
+            y: 100, 
+            opacity: 0, 
+            duration: 1
+        }, "<"); 
+    }, { scope: containerRef }); 
 
-//             // Animación de los textos
-//             headings.forEach((heading, i) => {
-//                 const duration = 1 / headings.length;
-//                 const position = i * duration;
+    return (
+        <section ref={containerRef} className="section section4">
+            <h2 ref={first}>TEXTO ENTRANDO POR ARRIBA</h2>
+            <h3 ref={second}>TEXTO ENTRANDO POR DEBAJO</h3>
+        </section>
+    );
+};
 
-//                 tl.to(heading, { opacity: 1 }, position)
-//                   .to(heading, { opacity: 0 }, position + duration);
-//             });
-
-//             render();
-//         };
-
-//         const render = () => {
-//             context.clearRect(0, 0, canvas.width, canvas.height);
-//             context.drawImage(images.current[imageSequence.current.frame], 0, 0);
-//         };
-//     }, { scope: scopeRef });
-
-//     return (
-//         <div ref={scopeRef}>
-//             <div className="spacer"></div>
-//             <div className="scroll-container_4">
-//                 <canvas ref={canvasRef} />
-//                 <div className="text-container_4">
-//                     <h3>Lorem ipsum dolor sit.</h3>
-//                     <h3>Labore, recusandae deleniti. Obcaecati.</h3>
-//                     <h3>Magni doloremque ducimus asperiores.</h3>
-//                     <h3>Ipsa in labore repellendus?</h3>
-//                     <h3>Inventore harum quasi quis?</h3>
-//                 </div>
-//             </div>
-//             <div className="spacer"></div>
-//             {/* Es buena práctica agregar un div extra para crear el scroll, si no hay más contenido */}
-
-//         </div>
-//     );
-// };
-
-// export default Section4;
+export default Section4;

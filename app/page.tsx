@@ -10,6 +10,10 @@ import Section2B from './components/Section2B/Section2B';
 import Navbar from './components/shared_components/Navbar/Navbar';
 import NavbarMobile from './components/shared_components/NavbarMobile/NavbarMobile';
 import { useViewportSize } from '@mantine/hooks';
+import Section3 from './components/Section3/Section3';
+import Section4 from './components/Section4/Section4';
+import Section5 from './components/Section5/Section5';
+import Section6 from './components/Section6/Section6';
 
 gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
@@ -48,13 +52,13 @@ export default function Home() {
         <>
         {isMobile?<NavbarMobile/>:  <Navbar/>}
         <div id="smooth-wrapper">
-            <div id="smooth-content" ref={mainRef}>
-              
-                 
-                
+            <div id="smooth-content" ref={mainRef}>  
                 <Section1 />
                 <Section2 />
-                <Section2B/>
+                <Section3/>
+                <Section4/>
+                <Section5/>
+                <Section6/>
             </div>
         </div>
         </>

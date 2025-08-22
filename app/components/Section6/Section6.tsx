@@ -9,7 +9,7 @@ import { getPrevSection, getVerticalOffset } from '@/app/utils';
 gsap.registerPlugin(ScrollTrigger);
 
 
-const Section3 = () => {
+const Section6 = () => {
     const containerRef = useRef(null);
     const first = useRef(null);
     const second = useRef(null);
@@ -48,11 +48,11 @@ const Section3 = () => {
     }, { scope: containerRef }); 
 
     return (
-        <section ref={containerRef} className="section section3">
+        <section ref={containerRef} className="section section6">
             <h2 ref={first}>TEXTO ENTRANDO POR ARRIBA</h2>
             <h3 ref={second}>TEXTO ENTRANDO POR DEBAJO</h3>
         </section>
     );
 };
 
-export default Section3;
+export default Section6;

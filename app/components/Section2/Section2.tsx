@@ -5,30 +5,10 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from "@gsap/react";
 import Text from '../shared_components/Text/Text';
 import "./styles.css";
+import { getPrevSection, getVerticalOffset } from '@/app/utils';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// Función para calcular el offset vertical
- //@ts-expect-error development
-const getVerticalOffset = (element) => {
-    if (!element) return 0;
-    return element.getBoundingClientRect().top + window.scrollY;
-};
-
-// Función para obtener la sección anterior
- //@ts-expect-error development
-const getPrevSection = (prevSectionClass, currentSectionElement) => {
-    if (prevSectionClass) {
-        const prevSection = document.querySelector(prevSectionClass);
-        if (prevSection) {
-            return prevSection;
-        }
-    }
-    if (currentSectionElement && currentSectionElement.previousElementSibling) {
-        return currentSectionElement.previousElementSibling;
-    }
-    return null;
-};
 
 const Section2 = () => {
     const containerRef = useRef(null);
