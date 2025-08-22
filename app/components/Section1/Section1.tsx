@@ -254,7 +254,7 @@ const startAnimation = () => {
                     <Text color='white'>
                         A global leader in premium synthetic thatch roofing and artificial bamboo, delivering durable, authentic, and innovative solutions for exceptional architectural designs.
                     </Text>
-                    <Bottom style={{marginTop:"15px"}} bgArrowColor='white' arrowColor='black'>
+                    <Bottom textColor='white' style={{marginTop:"15px"}} bgArrowColor='white' arrowColor='black'>
                         Get a free quote today 
                     </Bottom>
 

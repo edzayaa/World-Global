@@ -1,4 +1,4 @@
-import { TColor } from '@/app/interfaces';
+import { TColor, TFontWeight } from '@/app/interfaces';
 import { DetailedHTMLProps, FC, HTMLAttributes, PropsWithChildren } from 'react';
 import Text from '../Text/Text';
 import "./styles.css"
@@ -14,6 +14,9 @@ interface Props
   bgArrowColor?: TColor;
   arrowColor?: TColor;
   blur?:boolean;
+  textColor?:TColor;
+  borderColor?:"light-border"|"dark-border";
+  fontWeight?:TFontWeight;
 }
 
 const Bottom: FC<PropsWithChildren<Props>> = ({
@@ -22,15 +25,18 @@ const Bottom: FC<PropsWithChildren<Props>> = ({
   bgArrowColor = 'yellow', // Valor por defecto
   arrowColor = 'white', // Valor por defecto
   blur = true,
+  textColor = null,
+  borderColor='light-border',
+  //fontWeight=''
   ...props
 }) => {
 
-  const classes = `Bottom ${bgColor} ${blur? "blur":""}`;
+  const classes = `Bottom ${bgColor} ${blur? "blur":""} ${borderColor !== 'light-border' ? "dark-border":""}`;
   const arrowClasses = `Arrow ${bgArrowColor} arrow-${arrowColor}`;
 
   return (
     <button className={classes}  {...props}>
-        <Text color='white' fontWeight='medium'>
+        <Text color={ textColor? textColor :undefined} fontWeight='medium'>
             {children}
         </Text>
         <div className={arrowClasses}>

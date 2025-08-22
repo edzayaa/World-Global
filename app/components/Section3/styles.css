@@ -1,4 +1,146 @@
 .section3 {
-    background-color: rgb(73, 226, 43);
+    background-color: var(--white);
     min-height: 100dvh;
+    display: flex;
+    justify-content:flex-start;
+    flex-direction: column;
+    align-items: center;
+    background-image: url("/images/section_3_bg.png");
+    background-size: cover;
+    background-position: bottom center;
+    position: relative;
+    overflow: hidden;
 }
+
+.header_section3{
+    text-align: center;
+    font-size: 100px;
+    margin-top: 100px;
+}
+
+.key_benefits{
+    margin: 30px 0;
+}
+
+.planet_container{
+    position: absolute;
+    margin-inline: auto;
+    bottom: 0;
+     bottom:-30%;
+     /* wi */
+}
+
+.planet_image{
+    object-fit: contain;
+   
+    /* position: absolute;
+   
+    left: 50%;
+    transform: translateX(-50%); */
+    
+}
+
+.yellow_marker{
+    background-color: var(--yellow);
+    border-radius: 50%;
+    aspect-ratio: 1;
+    width: 30px;
+    position: absolute;
+}
+
+.marker_1{
+    bottom: 45%;
+    left: 5%;
+    width: 20px;
+}
+
+.marker_2{
+    top: 22%;
+    left: 4.5%;
+    width: 40px;
+}
+
+.marker_3{
+    top: -1.5%;
+    left: 42%;
+}
+
+.marker_4{
+    top: 16%;
+    right: 9%;
+     width: 40px;
+}
+
+.marker_5{
+    bottom: 50%;
+    right: -1%;
+    width: 20px;
+}
+
+.marker_6{
+    bottom: 55%;
+    right: 62%;
+}
+
+.label_marker{
+    position: absolute;
+    background-color: #fff;
+    padding: 7.5px 30px;
+    border-radius: 40px;
+    height: 47px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.label_marker span{
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--black);
+    font-size: 15px;
+    text-align: center;
+}
+
+.label_2{
+    top: 12.5%;
+    left: -10%;
+}
+
+.label_4{
+    top: 7%;
+    right: -3.5%;
+}
+
+.label_5{
+    bottom: 62%;
+    right: 50%;
+}
+
+.label_6{
+    bottom: 55.5%;
+    right: -22%;
+}
+
+
+
+@media only screen and (min-width:1400px) and (max-width: 1600px) {
+    .planet_image{
+        width:500px ;
+    }
+    .label_marker span{
+    font-size: 14px;
+}
+}
+
+@media only screen and (max-width: 1400px) {
+    .label_marker span{
+    font-size: 12px;
+}
+}
+
+@media only screen and (min-width:1024px) and (max-width: 1399px) {
+    .planet_image{
+        width:370px ;
+    }
+}
+

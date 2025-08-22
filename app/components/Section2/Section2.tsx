@@ -12,8 +12,6 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Section2 = () => {
     const containerRef = useRef(null);
-    const first = useRef(null);
-    const second = useRef(null);
 
     useGSAP(() => {
         // Obtenemos la sección anterior de forma dinámica.

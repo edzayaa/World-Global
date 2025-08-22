@@ -6,7 +6,6 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollSmoother } from 'gsap/ScrollSmoother'; // Importa el plugin
 import Section1 from "./components/Section1/Section1";
 import Section2 from "./components/Section2/Section2";
-import Section2B from './components/Section2B/Section2B';
 import Navbar from './components/shared_components/Navbar/Navbar';
 import NavbarMobile from './components/shared_components/NavbarMobile/NavbarMobile';
 import { useViewportSize } from '@mantine/hooks';

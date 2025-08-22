@@ -40,7 +40,7 @@ const Navbar = () => {
 
       <Link className={`link ${pathName === '/about-us' ? 'active' : ''}`}  /*onClick={(e) => navigateTo(e, "/about-us")}*/ href="/about-us">About us</Link>
 
-      <Bottom bgArrowColor="yellow" arrowColor="white">
+      <Bottom textColor="white" bgArrowColor="yellow" arrowColor="white">
         Quote now
       </Bottom>
     </nav>
