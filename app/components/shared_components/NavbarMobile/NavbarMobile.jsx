@@ -1,6 +1,6 @@
 
 
-import { useRef } from "react";
+import { useRef, memo } from "react";
 import gsap from "gsap"; // Importa GSAP
 import { useGSAP } from "@gsap/react";
 import "./styles.css"
@@ -11,7 +11,7 @@ import Link from "next/link";
 gsap.registerPlugin(useGSAP);
 
 
-export default function NavbarMobile() {
+ const NavbarMobile = () => {
 
   const pathName = usePathname()
 
@@ -27,7 +27,21 @@ export default function NavbarMobile() {
       .fromTo(container.current, {
         height: "60px"
       }, {
-        height: "85vh",
+        height: "900px",
+      }).fromTo(".menu-list", {
+        opacity:0,
+        y:"-20px"
+      }, {
+        opacity:1,
+        y:0,
+        delay:0.065
+      }).fromTo(".menu-list-extra", {
+        opacity:0,
+        y:"-20px"
+      }, {
+        opacity:1,
+        y:0,
+        delay:0.04
       });
   }, { scope: container });
   
@@ -92,6 +106,8 @@ export default function NavbarMobile() {
         </nav>
   );
 }
+
+export default memo(NavbarMobile);
 
   const menuItems = [
     {label:"Home", url:"/"},

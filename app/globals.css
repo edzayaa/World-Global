@@ -56,9 +56,16 @@ a {
 
 .blur_bg{
     background-color: var(--black-opacity);
-    background:
-    linear-gradient(to right, var(--black-opacity), var(--black-opacity)),
-    url("https://grainy-gradients.vercel.app/noise.svg");
-    backdrop-filter: blur(25px);
+    background:linear-gradient(to right, var(--black-opacity), var(--black-opacity)),
+    url("https://grainy-gradients.vercel.app/noise.svg");  
     background-blend-mode: color-burn;
+    backdrop-filter: blur(25px);
+  
+}
+
+@media only screen and (max-width: 767px) {
+  .blur_bg{
+    background: unset;
+    background-color: var(--black-opacity);
+  }
 }

@@ -11,6 +11,8 @@
   z-index: 3;
   display: flex;
   flex-direction: column;
+  max-height: 94.5dvh;
+  will-change: transform;
 }
 
 .alwayws_visible{
