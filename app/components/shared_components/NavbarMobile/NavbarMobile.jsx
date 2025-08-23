@@ -77,7 +77,7 @@ gsap.registerPlugin(useGSAP);
                     {menuItems.map(({label, url}, index) => {
                         // Compara la URL del item con el pathname actual
                         const isActive = url === pathName;
-                        console.log(pathName, url, isActive)
+                  
                         // Asigna la clase 'active' si isActive es true
                         const className = `menu-item ${isActive ? "active" : ""}`;
                         return (

@@ -7,24 +7,16 @@ import "./styles.css";
 import { getPrevSection, getVerticalOffset } from '@/app/utils';
 import Text from '../shared_components/Text/Text';
 import Bottom from '../shared_components/Bottom/Bottom';
-import Image from 'next/image';
 import { useViewportSize } from '@mantine/hooks';
 
 gsap.registerPlugin(ScrollTrigger);
 
-// const screenWidth = window.screen.width;
-// console.log("Screen Width:", screenWidth);
-
-
-//console.log("Viewport Width:", viewportWidth);
-
 
 const Section3 = () => {
+    
     const containerRef = useRef(null);
-    const first = useRef(null);
-    const second = useRef(null);
 
-       const viewportSize = useViewportSize();
+    const viewportSize = useViewportSize();
     const isMobile = viewportSize.width < 768;
 
     useGSAP(() => {
