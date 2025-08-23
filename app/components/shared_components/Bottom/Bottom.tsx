@@ -17,6 +17,7 @@ interface Props
   textColor?:TColor;
   borderColor?:"light-border"|"dark-border";
   fontWeight?:TFontWeight;
+  extraClass?:string;
 }
 
 const Bottom: FC<PropsWithChildren<Props>> = ({
@@ -27,11 +28,12 @@ const Bottom: FC<PropsWithChildren<Props>> = ({
   blur = true,
   textColor = null,
   borderColor='light-border',
+  extraClass = null,
   //fontWeight=''
   ...props
 }) => {
 
-  const classes = `Bottom ${bgColor} ${blur? "blur":""} ${borderColor !== 'light-border' ? "dark-border":""}`;
+  const classes = `Bottom ${bgColor} ${blur? "blur":""} ${borderColor !== 'light-border' ? "dark-border":""} ${extraClass ?? ''}`;
   const arrowClasses = `Arrow ${bgArrowColor} arrow-${arrowColor}`;
 
   return (

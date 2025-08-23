@@ -44,7 +44,17 @@ const Section3 = () => {
             }
         });
 
-        tl.fromTo(".planet_image", {
+        tl.fromTo(".section3 .enter_animation", {
+            y: -75, 
+            opacity: 0, 
+         
+        },
+        {
+            y: 0, 
+            opacity: 1, 
+            duration: 1,
+            stagger:0.125
+        }).fromTo(".planet_image", {
             rotate:"-45deg", 
             ease:'power4.in'
             //duration: 1
@@ -78,16 +88,19 @@ const Section3 = () => {
 
     return (
         <section ref={containerRef} className="section section3">
-            <Text variant='h2' extraClass='header_section3' fontSize='L'>
+            <Text variant='h2' extraClass='header_section3 enter_animation' fontSize='L'>
                 {isMobile ? <><>Eco-Friendly roofing<br/> solutions for a<br/> sustainable future</></> :<>Eco-Friendly roofing solutions<br/> for a sustainable future</>}
                 
             </Text>
             <Text extraClass='key_benefits enter_animation'  fontWeight='regular'>
                 Key benefits such as reduced environmental impact, fire resistance and UV resistant.
             </Text>
-            <Bottom  borderColor='dark-border' bgColor='white' bgArrowColor='yellow'>
-                Learn about our technology
-            </Bottom>
+            <div className='enter_animation'>
+                <Bottom  borderColor='dark-border' bgColor='white' bgArrowColor='yellow'>
+                    Learn about our technology
+                </Bottom>
+            </div>
+
             <div className="planet_container">
                 <img src={isMobile?"/images/planet_mobile.png" :"/images/planet_mobile.png"} className='planet_image'  alt='planet image'/>
                 
