@@ -54,7 +54,8 @@ const Section3 = () => {
             opacity: 1, 
             duration: 1,
             stagger:0.125
-        }).fromTo(".planet_image", {
+        }, ">")
+        .fromTo(".planet_image", {
             rotate:"-45deg", 
             ease:'power4.in'
             //duration: 1
@@ -62,19 +63,18 @@ const Section3 = () => {
         {
             rotate:0, 
             duration: 0.8
-        });
-
-        tl.fromTo(".yellow_marker", {
+        }, ">")
+        .fromTo(".yellow_marker", {
           
             opacity: 0, 
             scale:0,
          
         },{
-            ease:'bounce.in',
+            ease:'elastic.in',
             opacity:1, 
             scale:1,
-            duration: 1
-        }, "<").fromTo(`${isMobile? ".label_marker":'.label_animation'}`, {
+            duration: 0.8
+        }, ">").fromTo(`${isMobile? ".label_marker":'.label_animation'}`, {
           
             opacity: 0, 
             y:10,
@@ -82,8 +82,8 @@ const Section3 = () => {
         },{
             opacity: 1, 
             y:0,
-            duration: 1
-        }, "<"); 
+            duration: 0.8
+        }, ">"); 
     }, { scope: containerRef }); 
 
     return (

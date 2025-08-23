@@ -19,6 +19,8 @@ body {
   font-family: "aeonik";
   &::-webkit-scrollbar {
     background-color: #aaaaaa00; 
+    z-index: -1;
+    display: none;
     }/*
     &::-webkit-scrollbar-thumb {
      background: var(--yellow);
