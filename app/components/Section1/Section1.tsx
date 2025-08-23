@@ -94,7 +94,7 @@ const Section1 = () => {
             .to(loaderRef.current,{
                zIndex:-1,
                ease: 'none',
-               
+               duration:0.1
             }).fromTo(".scope_section1 .text-container",
                 {
                     opacity:0,
@@ -105,8 +105,9 @@ const Section1 = () => {
                     opacity:1,
                     y:0,
                     ease:"power4.in",
-                     duration:1
-                }
+                     duration:0.5
+                },
+                "<"
 
             ).fromTo(".scope_section1 .scroll_down",
                 {
@@ -118,7 +119,7 @@ const Section1 = () => {
                     opacity:1,
                     y:0,
                     ease:"power4.in",
-                    duration:1
+                     duration:0.5
                 },
                 "<"
 
@@ -131,7 +132,7 @@ const Section1 = () => {
                     opacity:1,
                     x:0,
                     ease:"power4.in",
-                     duration:1
+                     duration:0.5
                 },
                 "<"
             )

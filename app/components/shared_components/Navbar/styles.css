@@ -94,3 +94,16 @@
 .toggleBtn svg{
   margin-left: 10px;
 }
+@media only screen and (min-width:768px) and (max-width: 1399px) {
+    .navbar {
+    max-width: 612px;
+    height: 70px;
+    }
+
+    .navbar .link{
+
+    padding-inline: 10px;
+    font-size: 14px;
+    font-weight: 500;
+}
+}

@@ -1,6 +1,6 @@
 .section3 {
     background-color: var(--white);
-    min-height: 100dvh;
+    min-height: 100vh;
     display: flex;
     justify-content:flex-start;
     flex-direction: column;
@@ -140,7 +140,154 @@
 
 @media only screen and (min-width:1024px) and (max-width: 1399px) {
     .planet_image{
-        width:370px ;
+        width:360px ;
+    }
+    .yellow_marker{
+    width: 20px;
+    }
+
+    .label_marker{
+    padding: 5px 15px;
+    height: 35px;
+
+    }
+
+    .planet_container{
+         bottom: -33%;
     }
 }
 
+@media only screen and (min-width:768px) and (max-width: 1023px) {
+
+    .planet_image{
+        width:400px ;
+    }
+    .yellow_marker{
+    width: 20px;
+    }
+
+    .label_marker{
+    padding: 5px 15px;
+    height: 35px;
+
+    }
+
+    .planet_container{
+         bottom: -10%;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .section3{
+        background-image: url("/images/section_3_bg_mobile.png");
+        background-size: contain;
+        background-repeat: no-repeat;
+    }
+
+    .header_section3{
+        margin-top:12% ;
+        white-space: pre;
+        text-transform: capitalize;
+    }
+
+    .key_benefits{
+       text-align: center;
+       width: 85%;
+    }
+
+
+    .planet_image{
+        width:290px ;
+    }
+
+    .planet_container{
+        bottom: 15%;
+    }
+
+    .label_marker span{
+    font-size: 12px;
+        white-space: pre;
+    }
+
+    .yellow_marker{
+        background-color: var(--yellow);
+        border-radius: 50%;
+        aspect-ratio: 1;
+        width: 14px;
+        position: absolute;
+    }
+
+    .marker_1{
+        bottom: 7%;
+        left: 23.5%;
+        width: 10px;
+    }
+
+    .marker_2{
+        top: 22%;
+        left: 4.5%;
+        width: 18px;
+    }
+
+    .marker_3{
+        top: unset;
+       bottom: 3%;
+        right: 30%;
+        left: unset;
+    }
+
+    .marker_4{
+        top: 16%;
+        right: 9%;
+        width: 18px;
+    }
+
+    .marker_5{
+        bottom: 32%;
+        right: 18%;
+        width: 10px;
+    }
+
+    .marker_6{
+        bottom: 39%;
+        right: 69%;
+    }
+
+    .label_marker{
+        position: absolute;
+        background-color: #ffffff;
+        padding: 7.5px 15px;
+        border-radius: 40px;
+        height: unset;
+        min-height: 39px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+
+
+    .label_2{
+        top: 25%;
+        left: unset;
+        right: -5%;
+    }
+
+    .label_4{
+        top:unset;
+        right: 10%;
+        bottom: -12%;
+    }
+
+    .label_5{
+        bottom: 22%;
+        right: 50%;
+    }
+
+    .label_6{
+        bottom: unset;
+        right: unset;
+        left: -8%;
+        top: 2%;
+    }
+}

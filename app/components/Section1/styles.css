@@ -121,10 +121,10 @@ canvas {
 }
 @media only screen and (max-width: 767px) {
     .text-container{
-        left: 15%;
+        left: 13%;
     }
     .text_image_seq{
         text-align: center;
-        width: 80%;
+        width: 86%;
     }
 }

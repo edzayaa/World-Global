@@ -10,7 +10,7 @@
     transition: ease-in-out 0.2s;
     cursor: pointer;
     padding-left: 30px;
-   font-family: "aeonik";
+    font-family: "aeonik";
 }
 
 .Bottom.dark-border{
@@ -97,4 +97,19 @@
 }
 .Arrow.arrow-black path{
    fill: var(--black);
+}
+
+@media only screen and (min-width:768px) and (max-width: 1399px) {
+   .Bottom{
+      height: 50px;
+      border-radius: 12px;
+   }
+    .Arrow{
+    width:30px ;
+    margin-left: 6px;
+  }
+
+  .Arrow svg{
+   width:12px ;
+  }
 }

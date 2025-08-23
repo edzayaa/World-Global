@@ -64,7 +64,7 @@ const Section3 = () => {
             opacity:1, 
             scale:1,
             duration: 1
-        }, "<").fromTo(".label_animation", {
+        }, "<").fromTo(`${isMobile? ".label_marker":'.label_animation'}`, {
           
             opacity: 0, 
             y:10,
@@ -79,7 +79,8 @@ const Section3 = () => {
     return (
         <section ref={containerRef} className="section section3">
             <Text variant='h2' extraClass='header_section3' fontSize='L'>
-                Eco-Friendly roofing solutions<br/> for a sustainable future
+                {isMobile ? <><>Eco-Friendly roofing<br/> solutions for a<br/> sustainable future</></> :<>Eco-Friendly roofing solutions<br/> for a sustainable future</>}
+                
             </Text>
             <Text extraClass='key_benefits enter_animation'  fontWeight='regular'>
                 Key benefits such as reduced environmental impact, fire resistance and UV resistant.
