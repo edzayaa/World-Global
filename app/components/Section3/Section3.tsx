@@ -13,70 +13,64 @@ gsap.registerPlugin(ScrollTrigger);
 
 
 const Section3 = () => {
-    
+
     const containerRef = useRef(null);
 
     const viewportSize = useViewportSize();
     const isMobile = viewportSize.width < 768;
 
-    useGSAP(() => {
-        // Obtenemos una referencia al elemento que será nuestro 'pin' en la sección 1
-        // para que la segunda animación empiece después de que el 'pin' de la primera termine.
-        const prevSection = getPrevSection(undefined, containerRef.current);
+useGSAP(() => {
+    // Obtenemos una referencia al elemento que será nuestro 'pin' en la sección 1
+    // para que la segunda animación empiece después de que el 'pin' de la primera termine.
+    const prevSection = getPrevSection(undefined, containerRef.current);
 
-        if (!prevSection) return;
+    if (!prevSection) return;
 
-        const prevSectionOffset = getVerticalOffset(prevSection) + prevSection.scrollHeight;
-        const scrollDistance = 500; 
+    const prevSectionOffset = getVerticalOffset(prevSection) + prevSection.scrollHeight;
+    const scrollDistance = 500;
 
-        const tl = gsap.timeline({
-            scrollTrigger: {
-                trigger: containerRef.current,
-                start: prevSectionOffset + scrollDistance + 300,
-            }
-        });
+    const tl = gsap.timeline({
+        scrollTrigger: {
+            trigger: containerRef.current,
+            start: prevSectionOffset + scrollDistance + 300,
+        }
+    });
 
-        tl.fromTo(".section3 .enter_animation", {
-            y: -75, 
-            opacity: 0, 
-         
-        },
-        {
-            y: 0, 
-            opacity: 1, 
-            duration: 1,
-            stagger:0.125
-        }, ">")
-        .fromTo(".planet_image", {
-            rotate:"-45deg", 
-            ease:'power4.in'
-            //duration: 1
-        },
-        {
-            rotate:0, 
-            duration: 0.8
-        }, ">")
-        .fromTo(".yellow_marker", {
-          
-            opacity: 0, 
-            scale:0,
-         
-        },{
-            ease:'elastic.in',
-            opacity:1, 
-            scale:1,
-            duration: 0.8
-        }, ">").fromTo(`${isMobile? ".label_marker":'.label_animation'}`, {
-          
-            opacity: 0, 
-            y:10,
-         
-        },{
-            opacity: 1, 
-            y:0,
-            duration: 0.8
-        }, ">"); 
-    }, { scope: containerRef }); 
+    // Todas estas animaciones se inician al mismo tiempo.
+    tl.fromTo(".section3 .enter_animation", {
+        y: -75,
+        opacity: 0,
+    }, {
+        y: 0,
+        opacity: 1,
+        duration: 1,
+        stagger: 0.125
+    })
+    .fromTo(".planet_image", {
+        rotate: "-45deg",
+        ease: 'power4.in'
+    }, {
+        rotate: 0,
+        duration: 0.8
+    }, "<") // <-- Usamos "<" para que esta animación se inicie al mismo tiempo que la anterior
+    .fromTo(".yellow_marker", {
+        opacity: 0,
+        scale: 0,
+    }, {
+        ease: 'elastic.in',
+        opacity: 1,
+        scale: 1,
+        duration: 0.8
+    }, "<") // <-- Usamos "<" para que esta animación se inicie al mismo tiempo que la anterior
+    .fromTo(`${isMobile? ".label_marker":'.label_animation'}`, {
+        opacity: 0,
+        y: 10,
+    }, {
+        opacity: 1,
+        y: 0,
+        duration: 0.8
+    }, "<"); // <-- Usamos "<" para que esta animación se inicie al mismo tiempo que la anterior
+}, { scope: containerRef });
 
     return (
         <section ref={containerRef} className="section section3">

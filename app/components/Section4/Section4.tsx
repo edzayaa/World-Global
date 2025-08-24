@@ -68,12 +68,25 @@ const testimonials = [
 ]
 
 const Section4 = () => {
+
     const containerRef = useRef(null);
     const swipperRef = useRef(null);
     const blackRef = useRef<HTMLDivElement>(null);
 
     const viewportSize = useViewportSize();
     const isMobile = viewportSize.width < 768;
+    const isTablet = viewportSize.width < 1024 && viewportSize.width >= 768;
+
+    let slidesPerView = 4
+
+    if (isMobile) {
+        slidesPerView = 1
+    }
+
+    if (isTablet) {
+        console.log("IS TABLET")
+        slidesPerView = 2
+    }
 
     useGSAP(() => {
         // Obtenemos una referencia al elemento que será nuestro 'pin' en la sección 1
@@ -121,12 +134,14 @@ const Section4 = () => {
 
     }, { scope: containerRef }); 
 
-        const openCard = (id:string) =>{
+    const openCard = (id:string) =>{
+
         const target = blackRef.current?.querySelector(`#swipe-card_${id}`)
         if (!target) return;
+
         const child = target.children[0];
         child.classList.toggle("open");
-        }
+    }
 
     return (
         <section ref={containerRef} className="section section4">
@@ -142,12 +157,11 @@ const Section4 = () => {
                 <Swiper
                     ref={swipperRef}
                     draggable
-                    
                     spaceBetween={30}
                     scrollbar={{
                     hide: false,
                     }}
-                    slidesPerView={ isMobile ? 1:4} 
+                    slidesPerView={ slidesPerView } 
                     modules={[Scrollbar]}
                     className="mySwiper swiper_section4"
                 >
