@@ -51,10 +51,10 @@ const Section5 = () => {
                     </Text>
                     <Text className='have_a_question' fontWeight='medium' >Have a question or need assistance? Contact us and our team at WorldGD will get back to you as soon as possible.</Text>
                     </div>
-                   <a className='email' href="mailto:hello@worldgd.com">
-                    <Text fontWeight='medium' fontSize='S'>
-                    hello@worldgd.com
-                    </Text>
+                   <a className='email' type="" target='_blank' rel="noopener noreferrer" href="mailto:hello@worldgd.com">
+                        <Text fontWeight='medium' fontSize='S'>
+                        hello@worldgd.com
+                        </Text>
 
                     </a>
                    
