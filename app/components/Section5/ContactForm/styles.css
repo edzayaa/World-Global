@@ -1,0 +1,90 @@
+.contact_form{
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 45%;
+    padding: 3%;
+    display: flex;
+    padding-bottom: 0;
+    margin-top: 3%;
+}
+.input_container{
+    width: 100%;
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.input_container input,.input_container select,.contact_form textarea{
+   font-family: 'aeonik';
+    font-weight: 500;
+    font-size: 18px;
+   background-color: transparent;
+      outline: none;
+   box-shadow: none;
+   border: none;
+   border-bottom: 1px solid var(--gray);
+   
+   padding: 5px;
+   &::placeholder{
+    color: var(--gray);
+    font-weight: 500;
+   }
+}
+
+.contact_form textarea{
+    height:150px ;
+    margin-bottom: 40px;
+}
+
+.btn_container{
+    display: flex;
+    justify-content: flex-end;
+}
+
+.input_container input{
+   width: 45%;
+   color: var(--black);
+
+}
+
+/* Estilo para el select cuando una opción diferente a la por defecto está seleccionada */
+.input_container select option {
+  color: var(--black);
+}
+
+.input_container select{
+  color: var(--gray);
+  width: 45%;
+}
+
+
+/* Estilo para el select cuando una opción diferente a la por defecto está seleccionada */
+.input_container select.selected {
+  color: var(--black);
+}
+
+
+/* Estilo para el select cuando la opción por defecto está seleccionada */
+.input_container select option:disabled {
+     color: var(--gray);
+}
+
+@media only screen and (max-width: 767px) {
+    .contact_form{
+        width: 100%;
+        padding-bottom: 30px;
+    }
+    .input_container{
+        flex-direction: column;
+        margin-bottom: 0;
+    }
+    .input_container input, .input_container select{
+        width: 100%;
+       
+        margin-bottom: 20px;
+    }
+    .input_container input,.input_container select,.contact_form textarea{
+        padding: 7.5px;
+         font-size: 14px;
+    }
+}

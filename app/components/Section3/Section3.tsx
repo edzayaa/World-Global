@@ -60,7 +60,8 @@ useGSAP(() => {
         ease: 'elastic.in',
         opacity: 1,
         scale: 1,
-        duration: 0.8
+        duration: 0.8,
+        stagger:0.125
     }, "<") // <-- Usamos "<" para que esta animación se inicie al mismo tiempo que la anterior
     .fromTo(`${isMobile? ".label_marker":'.label_animation'}`, {
         opacity: 0,

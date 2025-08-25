@@ -1,5 +1,5 @@
 export type TColor = 'white' | 'gray' | 'yellow' | 'black' | 'yellow-opaque' | 'black-opaque' ;
-export type TextSize = 'XLL' | 'XL' | 'L' | 'M' | 'S' | 'XS' | 'XXS';
+export type TextSize = 'XXL' | 'XL' | 'L' | 'M' | 'S' | 'XS' | 'XXS';
 export type Variant = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'p';
 export type TFontWeight = 'light' | 'regular' | 'medium' | 'bold' | 'black';
 

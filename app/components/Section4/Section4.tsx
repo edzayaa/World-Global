@@ -84,7 +84,6 @@ const Section4 = () => {
     }
 
     if (isTablet) {
-        console.log("IS TABLET")
         slidesPerView = 2
     }
 

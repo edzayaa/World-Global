@@ -1,4 +1,143 @@
 .section5 {
-    background-color: aqua;
-    min-height: 100dvh;
+	background-color: var(--white);
+	min-height: 100dvh;
+	padding-top: 50px;
+}
+
+.section5 .swiper {
+	width: 100%;
+	height: 50vh;
+	max-height: 536px;
+	margin-bottom: 50px;
+}
+
+.section5 .swiper-slide {
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+	border-radius: 30px;
+	overflow: hidden;
+
+}
+
+.section5 .swiper-slide img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+
+.swiper-button-prev, .swiper-button-next {
+	top: var(--swiper-navigation-top-offset, 50%);
+	width: calc(var(--swiper-navigation-size) / 44 * 27);
+	height: var(--swiper-navigation-size);
+	color: var(--yellow);
+	background: var(--white);
+	padding: 35px;
+	border-radius: 50%;
+	&::after{
+		scale: 0.55;
+	}
+}
+
+.contact_banner{
+	max-width: 100%;
+	aspect-ratio: calc(1920/1097);
+	width: 100%;
+}
+
+.contact_container{
+	display: flex;
+    width: 100%;
+    margin-inline: auto;
+    padding: 5.5%;
+    padding-bottom: 2%;
+    border-radius: 40px 40px 0 0 ;
+    background-color: var(--white);
+    transform: translateY(-50px);
+}
+
+.section5 .text_box{
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+    width: 55%;
+}
+
+.have_a_question{
+    margin-top: 20px;
+    width: 50%;
+}
+
+@media only screen and (min-width:980px) and (max-width: 1399px) {
+    .section5 h2{
+       font-size: 80px !important;
+        
+    }
+}
+
+@media only screen and (min-width:768px) and (max-width: 979px) {
+    .section5 h2{
+       font-size: 60px !important;
+        
+    }
+}
+
+@media only screen and (max-width: 767px) {
+	.section5{
+		padding-inline: 5px;
+		padding-top: 0px;
+	}
+	.swiper-button-prev, .swiper-button-next {
+		top: unset;
+		bottom: -90px;
+		color: var(--white);
+		background: var(--black);
+	}
+
+	.swiper-button-prev{
+		right: 25%;
+		left: unset;
+	}
+
+	.section5 .swiper {
+		height: 90vh; 
+		max-height: 685px;
+		overflow: visible;
+	}
+	.section5 .swiper-slide {
+		border-radius: 15px;
+
+	}
+	.contact_banner{
+		display: none;
+	}
+
+    .contact_container{
+        flex-direction: column;
+        padding-top: 80px;
+        transform: none;
+    }
+    .section5 .text_box{
+       width: 100%;
+    }
+
+    .have_a_question{
+        text-align: center;
+        width: 100%;
+        margin-bottom: 30px;
+    }
+
+    .email{
+        display: none;
+    }
+
+    .section5 h2{
+        text-align: center;
+        
+    }
+
 }
